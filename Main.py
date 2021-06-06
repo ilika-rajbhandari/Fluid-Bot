@@ -1,35 +1,28 @@
 import numpy as np
 import cv2
-import math
-import time
-import matplotlib.pyplot as plt
 import xlsxwriter
-import os
-import datetime
-from pathlib import Path
-from PIL import Image
 from nomralizeRGB import *
 from circularMask import *
 from timeConvert import *
 from arcDetect import *
 from contorsHighlight import *
-
-
-
-
+from find_defect import *
 
 #User adjustable variables
-videoName = input("Please enter the full video title you wish to inspect:\n")
+videoName = input("Please enter the full video title you wish to inspect [path]:\n")
 frameStart = int(input("Please enter the start frame number:\n"))
 circularMaskRadius = int(input("The circular mask maskRadius is calculated using frame_width/integer. The smaller the integer, the bigger the mask, and vice versa. Please enter the integer:"))
 
 #String modifications to get rid of extension dot
 dirname = videoName.replace(".","")
-videodirname = str(os.getcwd()+ "\\" + str(dirname))
+#videodirname = str(os.getcwd()+ "\\" + str(dirname))
+videodirname = str(os.path.join(os.getcwd(),str(dirname)))
 
+print("Video Report Path: %s" % videodirname)
 #Try make a folder to save screenshots of blockages.
 try:
     os.mkdir(dirname)
+    os.mkdir(videodirname)
 except:
     print("Folder Already Exists")
 
@@ -154,6 +147,7 @@ while(1):
 
             if  recordTime != seconds and applyDetection:
                 flowRate = 1000 + np.random.rand(1) * 600  # Random data generated for flowrate.
+                print("Flow Rate : %s" % flowRate)
                 worksheet.write('A'+str(blockageCounter), str(blockageCounter-1)) 
                 worksheet.write('B'+str(blockageCounter), str(cap.get(cv2.CAP_PROP_POS_FRAMES))) 
                 worksheet.write('C'+str(blockageCounter), str(videoTime).replace(":","")) 
@@ -164,6 +158,7 @@ while(1):
                 worksheet.write('H'+str(blockageCounter), str(nominatedBlockageX))
                 worksheet.write('I'+str(blockageCounter), str(nominatedBlockageY))
                 worksheet.write('J'+str(blockageCounter), str(flowRate))
+                print ("Entered flow rate for %s" % str(blockageCounter))
                 blockageCounter = blockageCounter + 1
                 recordTime = seconds
                 nominated_blockage_area = 0
@@ -212,4 +207,5 @@ IoT device : Sensors for flow rate detection and transmitting data to central se
 # for i in range(rowCount):
 #     flowRate = 1000 + np.random.rand(1) * 600 #Random data generated for flowrate.
 #     worksheet.write('J'+str(i), str(flowRate))
-workbook.close() 
+workbook.close()
+find_defect(video_dir=videoName, output_dir=videodirname)
