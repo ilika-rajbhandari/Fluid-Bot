@@ -1,0 +1,20 @@
+<header class="header">
+  <div class="container-fluid sub-header">
+    <div class="row">
+      <div class="col-auto mr-auto">
+        <a class="navbar-brand" (click)="goToLogin()">
+          <img src="../../assets/images/logo-QuaranTeam.png" class="img-fluid logo" alt="img">
+        </a>
+      </div>
+      <div class="col-auto sub-main">
+        
+        <nav aria-label="breadcrumb">
+        </nav>
+
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid main-header" *ngIf="!router.url.includes('login')">
+
+  </div>
+</header>

@@ -1,0 +1,342 @@
+@import './admin.css';
+
+a {
+  color: #ffffff !important;
+}
+
+.live-video-track-wrapper {
+  /* background: url(../../assets/images/ai-bg.jpg) no-repeat;
+  background-size: cover;
+  background-attachment: fixed; */
+}
+
+.live-video-track-wrapper .video-container {
+  width: 100%;
+  box-shadow: 0 2px 6px #d0d0d0;
+  overflow: hidden;
+  border: 5px solid #fffcfc;
+  border-radius: 25px 25px 0 0;
+  max-width: 800px;
+}
+
+.bg-fancy {
+  padding: 1rem 0 !important;
+  background: #efefef;
+}
+
+.live-video-track-wrapper .rplr-30 {
+  background: white;
+}
+
+.live-video-track-wrapper .openLocation {
+  padding: 1rem 1.5rem;
+  border: 0;
+  font-size: 1.5rem;
+  color: #636368;
+  margin: 0px auto;
+  display: block;
+  background: #f1f2f5;
+  border-radius: 25px 25px 0 0;
+}
+
+
+.my-container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.video-with-details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.highlights-area {}
+
+.highlights-area .info-box-icon {
+  display: none;
+}
+
+.highlights-area .info-box-content {
+  margin-left: 15px;
+}
+
+.video-area {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+
+
+.ngb-toasts {
+  left: 40%;
+}
+
+.banner.just-anim {
+  padding: 1rem;
+  overflow: auto;
+}
+
+.banner:before {
+  top: 0;
+}
+
+
+$azure-radiance: #029dfc;
+$black: #000000;
+$concrete: #f2f2f2;
+$malibu: #639eff;
+$tundora: #464646;
+
+.c-share {
+  position: absolute;
+  width: 3.4375em;
+  height: 3.4375em;
+  right: 0;
+  top: 0;
+  z-index: 99;
+}
+
+.c-share__input {
+  display: none;
+
+  &.active~ {
+    .c-share__toggler .c-share__icon {
+      transition: 0s;
+      width: 0;
+      height: 0;
+      color: $malibu;
+
+      &::before {
+        transform: rotate(-45deg);
+      }
+
+      &::after {
+        transform: rotate(45deg);
+      }
+    }
+
+    .c-share_options {
+      width: 11.0625em;
+      height: 15.5em;
+      border-radius: 0.3125em;
+
+      &::before,
+      li {
+        transition: 0.3s 0.15s;
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+.c-share__toggler,
+.c-share_options {
+  position: absolute;
+  right: 0;
+  width: inherit;
+  height: inherit;
+  border-radius: 50%;
+  background-color: $concrete;
+}
+
+.c-share__toggler {
+  cursor: pointer;
+  z-index: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.c-share__icon {
+  position: relative;
+  left: -0.3125em;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  color: $azure-radiance;
+  background-color: currentColor;
+  box-shadow: 0.625em -0.625em, 0.625em 0.625em;
+  transition: 0.1s 0.05s;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 1em;
+    height: 0.125em;
+    background-color: currentColor;
+    transition: 0.1s;
+  }
+
+  &::before {
+    top: 0.1875em;
+    left: 0.1875em;
+    transform-origin: bottom left;
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    top: -0.125em;
+    left: 0.03125em;
+    transform-origin: center;
+    transform: rotate(-45deg);
+  }
+}
+
+.c-share_options {
+  list-style: none;
+  margin: 0;
+  padding: 1.0625em 1.25em;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: 0.2s;
+  box-shadow: 0 0.125em 0.125em rgba($black, 0.3);
+
+  &::before {
+    content: attr(data-title);
+    display: block;
+    margin-bottom: 1.25em;
+    font-weight: 700;
+  }
+
+  li {
+    font-size: 0.875em;
+    color: $tundora;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-bottom: 0.75em;
+    }
+  }
+
+  &::before,
+  li {
+    opacity: 0;
+    transform: translateY(0.625em);
+    transition: 0s;
+  }
+}
+
+
+
+/* .conection-shap:before{content: '';position: absolute; background: url('/src/assets/images/modern-flowing-blue-wave-banner-white-background_1035-18960.jpg') ;width:1800px; height: 100%; background-repeat: no-repeat; left:0; } */
+
+.createAlertOverlay {
+
+  .new-location-wrapper {
+    max-height: 300px;
+    padding: 2rem;
+    padding-top: 10px;
+  }
+  /* FORM */ 
+
+  .form .plan input,
+  .form .payment-plan input,
+  .form .payment-type input {
+    display: inline-flex;
+    height: 20px;
+    width: 30px;
+  }
+
+  .form .plan 
+  .form label {
+    position: relative;
+    color: #fff;
+    background-color: #9E9E9E;
+    font-size: 21px;
+    text-align: center;
+    line-height: 37px;
+    display: inline-grid;
+    cursor: pointer;
+    border: 3px solid transparent;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 41px;
+    margin-right: 18px;   
+  }
+
+  .form .pipe {
+      position: relative;
+      color: #fff;
+      background-color: #9E9E9E;
+      font-size: 21px;
+      text-align: center;
+      line-height: 37px;
+      display: inline-grid;
+      cursor: pointer;
+      border: 3px solid transparent;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      border-radius: 41px;
+      margin-right: 18px; 
+      margin-left:18px;
+      width: 60%;  
+    }
+  
+
+  
+
+  .form .plan input:checked+label,
+  .form .payment-plan input:checked+label,
+  .form .payment-type input:checked+label {
+    border: 3px solid #333;
+    background-color: #039ada;
+    border-radius: 41px;
+  }
+
+  .form .plan input:checked+label:after,
+  form .payment-plan input:checked+label:after,
+  .form .payment-type input:checked+label:after {
+    content: "\2713";
+    width: 30px;
+    height: 30px;
+    line-height: 28px;
+    border-radius: 100%;
+    border: 2px solid #03A9F4;
+    background-color: #E91E63;
+    z-index: 999;
+    position: absolute;
+    top: -18px;
+    right: -10px;
+  }
+
+  .button {
+    width: 100%;
+    font-size: 25px;
+  }
+
+  .plan .button {
+    width: 80%;
+  }
+  .plan .input {
+    display: inline-flex;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .iq-contactbox .contact-bg {
+
+    margin: 1rem 0;
+  }
+
+  .form-control {
+    font-size: 23px;
+  }
+
+  
+}
+
+#video-details {
+  font-size: 11px;
+  color: #aba2a2;
+  text-align: center;
+}

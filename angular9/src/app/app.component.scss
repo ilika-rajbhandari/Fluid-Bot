@@ -1,0 +1,20 @@
+.app-body {
+    background-color: #DEF3FD;
+}
+
+.btn-primary {
+    display: block;
+    margin: 0 auto;
+    background-color: #6C286B;
+    border-color: #6C286B;
+}
+
+agm-map {
+    height: 300px !important;
+    width: 100%;  /* This is really important*/
+  }
+
+.placeholder-container {
+    min-height: 50vh;
+    padding-bottom: 108px;
+}
