@@ -181,7 +181,7 @@ footer .social-icone ul li:nth-last-child(1){padding-right: 0;}
 .Get-tips-tricks .tips-img img{max-width: 120%; }
 .service-provide .services{padding: 30px 30px 30px 30px;}
 .conection-shap{position: relative; overflow: hidden;}
-.conection-shap:before{content: '';position: absolute; background: url('../images/modern-flowing-blue-wave-banner-white-background_1035-18960.jpg') ; width:21%;height: 56%; background-repeat: no-repeat; right:0; top: 41%; }
+/* .conection-shap:before{content: '';position: absolute; background: url('../images/download.jpg') ; width:100%;height: 100%; background-repeat: no-repeat; right:0; top: 0; } */
 /*.finding-shap{position: relative;overflow: hidden;}
 .finding-shap:before{content: '';position: absolute; background: url('../images/banner/finding-shap.png') ; width:38%;height: 83%; background-repeat: no-repeat; left:0; top: 25%; left: -47px; -webkit-animation: bounce 2s infinite alternate;}
 .tricks-shap{position: relative; overflow: hidden;}

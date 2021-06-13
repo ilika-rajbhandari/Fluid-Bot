@@ -9,14 +9,53 @@ a {
   background-size: cover;
   background-attachment: fixed; */
 }
+.row.animation {
+  margin-top: -50%;
+}
+
+button.btn.bg-transparent {
+  position: absolute;
+  /* margin-left: 10%; */
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+::ng-deep .modal-content {
+  width: 530px 
+}
+
+.container {
+  margin-top:  20px;
+}
+
+section#liveVideoSection {
+  margin-left: 10%;
+}
+
+.sub-container {
+  background-color: skyblue;
+  background-image: linear-gradient(skyblue, blue);
+}
+
+.statistics {
+  height:  60px;
+  font-size: 40px;
+  box-shadow: 0 2px 6px #d0d0d0;
+}
+
+.video-button {position: relative;}
 
 .live-video-track-wrapper .video-container {
-  width: 100%;
   box-shadow: 0 2px 6px #d0d0d0;
   overflow: hidden;
   border: 5px solid #fffcfc;
   border-radius: 25px 25px 0 0;
   max-width: 800px;
+  margin-top: 20px;
+}
+.col-lg-6.grid-margin.stretch-card {
+  margin-top: -12%;
 }
 
 .bg-fancy {
@@ -49,7 +88,7 @@ a {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  
 }
 
 .highlights-area {}
@@ -66,8 +105,10 @@ a {
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
+  border: 2px solid #efefef;
 }
 
+.stretch-card {}
 
 
 .ngb-toasts {
@@ -188,6 +229,7 @@ $tundora: #464646;
   }
 }
 
+
 .c-share_options {
   list-style: none;
   margin: 0;
@@ -222,14 +264,37 @@ $tundora: #464646;
   }
 }
 
+.input-group span {
+  width: 100%;
+}
 
+button.btn.btn-primary {
+  margin: 10px;
+}
+.input-group input[type=checkbox] {
+  float: left;
+  width: 25px;
+  margin-top: 10px;
+}
+
+.input-group input + span.input-group-addon {
+  float: left;
+  width: 50%;
+}
+video {
+  border: 5px solid white;
+}
+
+.input-group {
+  margin-bottom: 10px;
+}
 
 /* .conection-shap:before{content: '';position: absolute; background: url('/src/assets/images/modern-flowing-blue-wave-banner-white-background_1035-18960.jpg') ;width:1800px; height: 100%; background-repeat: no-repeat; left:0; } */
 
 .createAlertOverlay {
 
   .new-location-wrapper {
-    max-height: 300px;
+    max-height: 550px;
     padding: 2rem;
     padding-top: 10px;
   }

@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AgmCoreModule } from '@agm/core';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { ChartsModule, ThemeService } from 'ng2-charts';
 
 
 import { AppComponent } from './app.component';
@@ -43,13 +44,14 @@ import { DynamicClassDirective } from './customDirective';
     HttpClientModule,
     HighchartsChartModule,
     NgbModule,
+    ChartsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDqgTqghMT9TnKMPOJt-4wAEgGcoUgMKE8',
       libraries: ['places']
     }),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [ThemeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

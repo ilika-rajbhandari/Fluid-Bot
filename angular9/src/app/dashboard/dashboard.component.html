@@ -5,12 +5,21 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 text-center mt-2">
-                <button type="button" class="change-location button" (click)="openChangeLocationPopup()">Change
+                <button type="button" class="btn btn-primary" (click)="openChangeLocationPopup()">Change
                     location</button>
-                <button type="button" class="change-location button" (click)="openCreateAlertPopup()">Schedule
+                <button type="button" class="btn btn-primary" (click)="open(content)">Schedule
                     Alert</button>
-                <button type="button" class="change-location button" (click)="shareNow()">Share Status</button>
-                <button type="button" class="btn btn-outline-secondary" style="background-color: #6c757d;color: #fff;">{{ selectedArea.locality }}</button>
+                <button type="button" class="btn btn-primary" (click)="shareNow()">Share Status</button>
+                <!-- <button type="button" class="btn btn-secondary">{{ selectedArea.locality }}</button> -->
+                
+                    <div ngbDropdown class="d-inline-block">
+                      <button class="btn btn-secondary" id="dropdownBasic1" style="background-color: #333; color:#fff" ngbDropdownToggle>{{ selectedArea.locality }}</button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem>Profile</button>
+                        <button ngbDropdownItem>Logout</button>
+                      </div>
+                    </div>
+            
             </div>
         </div>
 
@@ -40,328 +49,297 @@
     </div>
 
     <!-- change location end here -->
-
-    <div class="overlay-wrapper createAlertOverlay" [ngClass]='isCreateAlert ? "show-popup" : ""'>
-
-        <div class="new-location-wrapper">
-            <span id="close-it" (click)="closeCreateAlertPopup()">X</span>
-            <h3>Schedule Alert for-</h3>
-            <div class="list">
-                <div class="form">
-                    <div class="plan cf">                        
+    <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Generate Alert</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Email</span>
+                <input type="text" class="form-control" placeholder="Email" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Mobile</span>
+                <input type="text" class="form-control" placeholder="Mobile" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Frequency</span>
+                <select class="form-control" name="alert-type" id="alert-type">
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>                    
+                </select>
+            </div>
+            <div class="input-group">                      
+                <input type="checkbox" name="pipeblockage" />
+                <span class="input-group-addon">Pipe Blockage </span>
+                <input type="number" class="form-control" name="violationLevel" [(ngModel)]="pipeblockage" placeholder="or 100 +" id="pipeblockage" [value]="" style="display:inline-flex; width: 50px;height: 40px; margin-left: 20px;">
+            </div>
+            <div class="input-group">
                         <input type="checkbox" name="pipeblockage" />
-                        <label class="pipe">Pipe Blockage </label>
-                        <input type="number" name="violationLevel" [(ngModel)]="pipeblockage" placeholder="or 100 +" id="pipeblockage" [value]="" style="display:inline-flex; width: 50px;height: 40px; margin-left: 20px;">
-                        <br>
-                        <input type="checkbox" name="pipeblockage" />
-                        <label class="pipe">Remaining Pipe Time Span </label>
-                        <input type="number" name="violationLevel" [(ngModel)]="pipetimespan" placeholder="or 100 +" id="pipetimespan" [value]="" style="display:inline-flex; width: 50px; height:40px;margin-left: 20px;">
-                        <br>
+                        <span class="input-group-addon">Remaining Pipe Time Span </span>
+                        <input type="number" class="form-control" name="violationLevel" [(ngModel)]="pipetimespan" placeholder="or 100 +" id="pipetimespan" [value]="" style="display:inline-flex; width: 50px; height:40px;margin-left: 20px;">
+                        </div>
+                        <div class = "input-group">
                         <input type="checkbox" name="pipeblockage" />
                         
-                        <label class="pipe">Flow Rate </label>
-                        <input type="number" name="violationLevel" [(ngModel)]="flowrate" placeholder="or 100 +" id="flowrate" [value]="" style="display:inline-flex; width: 50px; height: 40px; margin-left: 20px;">
+                        <span class="input-group-addon">Flow Rate </span>
+                        <input type="number" class="form-control" name="violationLevel" [(ngModel)]="flowrate" placeholder="or 100 +" id="flowrate" [value]="" style="display:inline-flex; width: 50px; height: 40px; margin-left: 20px;">
                     </div>
-                </div>
-            </div>
-            <div class="row mb-2 mt-2">
-                <div class="col-sm-12">
-                    <button type="button" class="btn btn-secondary btn-block" id="updateLocation" (click)="createAlert()">Set Alert!</button>
-                </div>
-            </div>
+          </form>
         </div>
-
-       <!--  <div class="new-location-wrapper">
-            <span id="close-it" (click)="closeCreateAlertPopup()">X</span>
-            <h3>Schedule Alert</h3>
-            <p>Get an alert notification if the pipe blockage in the area exceeds: 20 , 50, 80</p>
-
-            <div class="list">
-                <div class="form">
-                    <div class="plan cf">
-                        <input type="radio" name="violationLevel" [(ngModel)]="violationLevel" id="violationLevel1" [value]="20" checked><label class="free-label four col" for="violationLevel1">20</label>
-                        <input type="radio" name="violationLevel" [(ngModel)]="violationLevel" id="violationLevel2" [value]="50" checked><label class="basic-label four col" for="violationLevel2">50</label>
-                        <input type="radio" name="violationLevel" [(ngModel)]="violationLevel" id="violationLevel3" [value]="80" ><label class="basic-label four col" for="violationLevel3">80</label>
-                        <input type="number" name="violationLevel" [(ngModel)]="violationLevel" placeholder="or 100 +" id="violationLevel4" [value]="" style="display:block; width: 50px">
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-2 mt-2">
-                <div class="col-sm-12">
-                    <button type="button" class="btn btn-secondary btn-block" id="updateLocation" (click)="createAlert()">Set Alert for {{violationLevel}}</button>
-                </div>
-            </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); createAlert()">Set Alert</button>
         </div>
- -->
+      </ng-template>
     </div>
-    <!-- change location end here -->
 
-</div>
+<!-- Video content-->
+<div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <div class="info-box animate__animated animate__flash animate__delay-1s" style="
+        background-color: #5aa3c5 !important;color:whitesmoke">
+           <span class="info-box-icon"><img src="./assets/images/pipeline.png"></span>
 
-<section class="live-video-track-wrapper conection-shap" id="liveVideoSection">
+           <div class="info-box-content">
+               <span class="info-box-number">{{ selectedArea.totalPipeLength }} KM</span>
+               <div class="progress">
+                   <div class="progress-bar" style="width: 80%"></div>
+               </div>
+               <span class="progress-description">
+                Length of pipe
+               </span>
+           </div>
+        </div>
+           <!-- /.info-box-content -->
+        </div>
+      <div class="col-md">
+        <div class="info-box animate__animated animate__flash animate__delay-1s" style="
+        background-color: #5aa3c5 !important;color:whitesmoke">
+           <span class="info-box-icon"><img src="./assets/images/gas-pipeline.png"></span>
+
+           <div class="info-box-content">
+               <span class="info-box-number">{{ selectedArea.percentageOfBlockage }} %</span>
+               <div class="progress">
+                   <div class="progress-bar" style="width: 80%"></div>
+               </div>
+               <span class="progress-description">
+                Average Blocked Pipes
+               </span>
+           </div>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="info-box animate__animated animate__flash animate__delay-1s" style="
+        background-color: #5aa3c5 !important;color:whitesmoke">
+           <span class="info-box-icon"><img src="./assets/images/pressure-gauge.png"></span>
+
+           <div class="info-box-content">
+               <span class="info-box-number">{{ selectedArea.flowRate }} L/s</span>
+               <div class="progress">
+                   <div class="progress-bar" style="width: 80%"></div>
+               </div>
+               <span class="progress-description">
+                Average Flow Rate
+               </span>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <!--First container ends-->
+
+ <div class= "container">
+     <div class="sub-container"><span class="statistics input-group-addon"> Statistics</span></div>
+     
+     <div class="row mt-3 bg-fancy video-info-area">
+        <div class="col-lg-6 col-md-6">
+            <div class="rplr-30">
+                <div class="c-share">
+                    <input class="c-share__input" [class.active]="isActive" type="checkbox" id="checkbox">
+                    <label class="c-share__toggler" (click)="isActive = !isActive;" for="checkbox">
+                        <span class="c-share__icon"></span>
+                    </label>
+                    <ul class="c-share_options" data-title="Share">
+                        <li>Share as Image</li>
+                        <li>Share as CSV</li>
+                        <li>Share as PDF</li>
+                        <li>Share via Email</li>
+                    </ul>
+                </div>
+                <div class="future-services services  text-center wow slideInUp" data-wow-duration="0.5s" style="visibility: visible; animation-duration: 0.5s; animation-name: slideInUp;">
+                    <highcharts-chart [Highcharts]="Highcharts" [options]="selectedLineChart" style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+            <div class="rplr-30">
+                <div class="c-share">
+                    <input class="c-share__input" [class.active]="isActiveShare" type="checkbox" id="checkbox">
+                    <label class="c-share__toggler" for="checkbox" (click)="isActiveShare = !isActiveShare;">
+                        <span class="c-share__icon"></span>
+                    </label>
+                    <ul class="c-share_options" data-title="Share">
+                        <li>Share as Image</li>
+                        <li>Share as CSV</li>
+                        <li>Share as PDF</li>
+                        <li>Share via Email</li>
+                    </ul>
+                </div>
+                <div class="future-services services text-center wow slideInUp" data-wow-duration="1s" style="visibility: visible; animation-duration: 1s; animation-name: slideInUp;">
+                    <highcharts-chart [Highcharts]="Highcharts" [options]="selectedGraph" style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+
+
+<ng-template #videocontent1 let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Central Delhi</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+       <video src="{{currentVideo}}" height="300px" width="500px" autoplay loop></video>
+       <span class="input-group-addon">Length of Pipe: 500 KM </span>
+       <span class="input-group-addon">Diameter of Pipe: 10 M </span>
+       <span class="input-group-addon">Current Age of Pipe: 98 years </span>
+       <span class="input-group-addon">Pipe Material: Cast Iron </span>
+       <span class="input-group-addon">Flow Rate: 98 years </span>
+       <span class="input-group-addon">Remaining useful life: 5 years </span>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div>
+  </ng-template>
+
+
+
+  <ng-template #videocontent2 let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">South Delhi</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+       <video src="{{currentVideo}}" height="300px" width="500px" autoplay loop></video>
+       <span class="input-group-addon">Length of Pipe: 500 KM </span>
+       <span class="input-group-addon">Diameter of Pipe: 10 M </span>
+       <span class="input-group-addon">Current Age of Pipe: 98 years </span>
+       <span class="input-group-addon">Pipe Material: Cast Iron </span>
+       <span class="input-group-addon">Flow Rate: 98 years </span>
+       <span class="input-group-addon">Remaining useful life: 5 years </span>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div>
+  </ng-template>
+
+  <ng-template #videocontent3 let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">West Delhi</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+       <video src="{{currentVideo}}" height="300px" width="500px" autoplay loop></video>
+       <span class="input-group-addon">Length of Pipe: 500 KM </span>
+       <span class="input-group-addon">Diameter of Pipe: 10 M </span>
+       <span class="input-group-addon">Current Age of Pipe: 98 years </span>
+       <span class="input-group-addon">Pipe Material: Cast Iron </span>
+       <span class="input-group-addon">Flow Rate: 98 years </span>
+       <span class="input-group-addon">Remaining useful life: 5 years </span>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div>
+  </ng-template>
+
+  <ng-template #videocontent4 let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Najafgarh</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+       <video src="{{currentVideo}}" height="300px" width="500px" autoplay loop></video>
+       <span class="input-group-addon">Length of Pipe: 500 KM </span>
+       <span class="input-group-addon">Diameter of Pipe: 10 M </span>
+       <span class="input-group-addon">Current Age of Pipe: 98 years </span>
+       <span class="input-group-addon">Pipe Material: Cast Iron </span>
+       <span class="input-group-addon">Flow Rate: 98 years </span>
+       <span class="input-group-addon">Remaining useful life: 5 years </span>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+    </div>
+  </ng-template>
+
+
+
+ <section class="live-video-track-wrapper conection-shap" id="liveVideoSection">
     <div class="banner just-anim">
 
         <div class="my-container container">
 
-            <div class="video-with-details row">
-                <div class="highlights-area col-sm-12 col-lg-2 animate__animated animate__bounce">
-                    <div class="row" style="width: 152%;">
-                        <div class="col-sm-12" style="color:whitesmoke">
-                            <!-- Info Boxes Style 2 -->
-                            <div class="info-box animate__animated animate__slideInLeft animate__delay-1s" style="background-color: #C55A86 !important;">
-                                <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+            <div class="video-with-details row">  
+                <div class="video-area col-sm">                                               
+                    
+                         <div class= "video-button">                         
+                                <video src="{{currentVideo}}" ngbPopover="Central Dlehi"
+  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="200px" height="100px" autoplay loop></video> <button class="btn bg-transparent" (click)="open(videocontent1)"></button></div></div>
 
-                                <div class="info-box-content">
-                                    <span class="info-box-number">{{ selectedArea.noOfViolations}} Violations</span>
+  <div class="video-area col-sm">
+        <div class="video-button">
+              <video src="{{currentVideo}}" ngbPopover="South Delhi"
+  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="200px" height="100px" autoplay loop></video><button class="btn bg-transparent" (click)="open(videocontent2)"></button></div></div>
 
-                                    <div class="progress">
-                                        <div class="progress-bar" style="width: 80%"></div>
-                                    </div>
-                                    <span class="progress-description">
-                                        40% Increase in 30 Days
-                                    </span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
-                            <div class="info-box bg-green animate__animated animate__slideInLeft animate__delay-2s" style="background-color: #599FB0 !important;">
-                                <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
+  <div class="video-area col-sm">
+        <div class="video-button">             
+                                <video src="{{currentVideo}}" ngbPopover="West Delhi"
+  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="200px" height="100px" autoplay loop></video><button class="btn bg-transparent" (click)="open(videocontent3)"></button></div></div>
 
-                                <div class="info-box-content">
-                                    <span class="info-box-number">{{ selectedArea.containmentZoneDistance}} KM</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" style="width: 80%"></div>
-                                    </div>
-                                    <span class="progress-description" style="line-height: 1.4;white-space: break-spaces !important;">
-                                        This area is {{ selectedArea.containmentZoneDistance}}KM away from containment zone
-                                    </span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
-                            <div class="info-box bg-red animate__animated animate__slideInLeft animate__delay-3s" style="background-color:#9999cc !important;">
-
-                                <div class="info-box-content">
-                                    <span class="info-box-number">{{ selectedArea.lastDayViolationCount }} Violations</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" style="width: 80%"></div>
-                                    </div>
-                                    <span class="progress-description">
-                                        Yesterday
-                                    </span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
+  <div class="video-area col-sm">
+  <div class="video-button"> 
+  <video src="{{currentVideo}}" ngbPopover="Najafgarh"
+  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="200px" height="100px" autoplay loop></video><button class="btn bg-transparent" (click)="open(videocontent4)"></button></div></div>                            
+                                
                         </div>
-                    </div>
-                </div>
-                <div class="video-area col-sm-12 col-lg-6">
-                    <div class="row ">
-                        <div class="col-sm-12">
-
-                            <div class="video-container animate__animated animate__zoomIn">
-                                <!--<iframe width="100%" height="100%"
-                                    src="https://www.youtube.com/embed/obtERdHvM8o?controls=0" frameborder="0"
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>-->
-
-                                <!--<video width="100%" height="100%" autoplay loop id="aiVideo" #videoPlayer>
-                                    <source [src]="currentVideo" type="video/mp4" id="mp4video">
-                                    <source src="movie.ogg" type="video/ogg">
-                                    Your browser does not support the video tag.
-                                </video>-->
-                                <video src="{{currentVideo}}" width="100%" height="100%" autoplay loop>
-                                </video>
-                                <div id="video-details">You're watching {{ selectedArea.locality }} </div>
-                            </div>
                         </div>
-                    </div>
+                   </div>
+                   <div id="video-details">You're watching {{ selectedArea.locality }} </div>
                     <!-- Video container end here-->
-                </div>
-
-                <div class="highlights-area col-sm-12 col-lg-2 animate__animated animate__bounce" style="left:-6%;">
-                    <div class="row" style="width: 152%;">
-                        <div class="col-sm-12">
-
-                            <!-- /.info-box -->
-                            <div class="info-box animate__animated animate__slideInRight animate__delay-1s" style="
-                             background-color: #C55A86 !important;color:whitesmoke">
-                                <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-number">{{ selectedArea.avgHourlyViolations }} Violations</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" style="width: 80%"></div>
-                                    </div>
-                                    <span class="progress-description">
-                                        Average hourly violations
-                                    </span>
-                                </div>
-                                <!-- /.info-box-content -->
+                    
+                        <!-- <div class="col-lg-6 grid-margin stretch-card">
+                            <div class="card">
+                              <div class="card-body">
+                                <h4 class="card-title">Remaining Pipe Time Span(in Years)</h4>
+                                <canvas baseChart [chartType]="'pie'" [datasets]="doughnutPieChartData" [labels]="doughnutPieChartLabels" [options]="doughnutPieChartOptions" [colors]="doughnutPieChartColors"></canvas>
+                              </div>
                             </div>
-                            <!-- /.info-box -->
+                    </div>      -->               
 
-                            <!-- /.info-box -->
-                            <div class="info-box bg-aqua animate__animated animate__slideInRight animate__delay-2s" style="background-color: #599FB0 !important;">
-                                <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-number">{{ selectedArea.activeCovidCasesInArea}} Covid Cases</span>
-
-                                    <div class="progress">
-                                        <div class="progress-bar" style="width: 80%"></div>
-                                    </div>
-                                    <span class="progress-description">
-                                        Active Covid Cases in area
-                                    </span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
-
-                            <!-- /.info-box -->
-                            <div class="info-box bg-aqua animate__animated animate__slideInRight animate__delay-3s" style="background-color:#9999cc !important;">
-                                <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-number">{{ selectedArea.localityType}}</span>
-
-                                    <div class="progress">
-                                        <div class="progress-bar" style="width: 80%"></div>
-                                    </div>
-                                    <span class="progress-description">
-                                        Locality Type
-                                    </span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-3 bg-fancy video-info-area">
-                <div class="col-lg-6 col-md-6">
-                    <div class="rplr-30">
-                        <div class="c-share">
-                            <input class="c-share__input" [class.active]="isActive" type="checkbox" id="checkbox">
-                            <label class="c-share__toggler" (click)="isActive = !isActive;" for="checkbox">
-                                <span class="c-share__icon"></span>
-                            </label>
-                            <ul class="c-share_options" data-title="Share">
-                                <li>Share as Image</li>
-                                <li>Share as CSV</li>
-                                <li>Share as PDF</li>
-                                <li>Share via Email</li>
-                            </ul>
-                        </div>
-                        <div class="future-services services  text-center wow slideInUp" data-wow-duration="0.5s" style="visibility: visible; animation-duration: 0.5s; animation-name: slideInUp;">
-                            <highcharts-chart [Highcharts]="Highcharts" [options]="selectedLineChart" style="width: 100%; height: 400px; display: block;"></highcharts-chart>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="rplr-30">
-                        <div class="c-share">
-                            <input class="c-share__input" [class.active]="isActiveShare" type="checkbox" id="checkbox">
-                            <label class="c-share__toggler" for="checkbox" (click)="isActiveShare = !isActiveShare;">
-                                <span class="c-share__icon"></span>
-                            </label>
-                            <ul class="c-share_options" data-title="Share">
-                                <li>Share as Image</li>
-                                <li>Share as CSV</li>
-                                <li>Share as PDF</li>
-                                <li>Share via Email</li>
-                            </ul>
-                        </div>
-                        <div class="future-services services text-center wow slideInUp" data-wow-duration="1s" style="visibility: visible; animation-duration: 1s; animation-name: slideInUp;">
-                            <highcharts-chart [Highcharts]="Highcharts" [options]="selectedGraph" style="width: 100%; height: 400px; display: block;"></highcharts-chart>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </section>
 
-<section class="main-bg counter">
-    <div class="container">
-        <div class="row iq-counter3 text-center">
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="iq-counter iq-pt-30 iq-rmb-30">
-                    <span class="timer text-white" data-to="575" data-speed="5000">{{covidSummary?.Global?.TotalConfirmed || '496'}}</span>
-
-                    <h6 class="mt-3 text-white">Confirmed</h6>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="iq-counter iq-pt-30 iq-rmb-30">
-                    <span class="timer text-white" data-to="1540" data-speed="5000">{{covidSummary?.Global?.TotalDeaths || '6'}}</span>
-                    <h6 class="mt-3 text-white">Deaths</h6>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="iq-counter iq-pt-30 iq-rmb-30">
-                    <span class="timer text-white" data-to="110" data-speed="5000">{{covidSummary?.Global?.TotalRecovered || '290'}}</span>
-                    <h6 class="mt-3 text-white">Recovered</h6>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<div class="container mb-2" style="max-width: 86%;">
-    <div class="row mt-5">
-        <div class="col-sm-12">
-            <div class="title-box-1">
-                <h2 class="title font-weight-bold">How it works</h2>
-                <p class="sub-title">We are life saviour</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-3 col-md-3">
-            <div class="future-services text-center wow slideInUp" data-wow-duration="0.5s" style="visibility: visible; animation-duration: 0.5s; animation-name: slideInUp;">
-                <div class="future-img">
-                    <img src="../../assets/images/Subscribe.png" class="img-fluid mb-4" alt="">
-                </div>
-                <p class="mb-0">Subscribe to our social distancing app to get the latest updates.</p>
-                <br />
-                <a class="button" href="#"><b>Subscribe</b></a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3">
-            <div class="future-services text-center wow slideInUp" data-wow-duration="1s" style="visibility: visible; animation-duration: 1s; animation-name: slideInUp;">
-                <div class="future-img">
-                    <img src="../../assets/images/cctv.png" class="img-fluid mb-4" alt="">
-                </div>
-                <p class="mb-0"> Add existing CCTV/RTSP camera just by providing its url to start monitoring the area.
-                </p>
-                <br />
-                <a class="button" href="#"><b>Add CCTV Camera</b></a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3">
-            <div class="future-services text-center wow slideInUp" data-wow-duration="1.5s" style="visibility: visible; animation-duration: 1.5s; animation-name: slideInUp;">
-                <div class="future-img">
-                    <img src="../../assets/images/alert.png" class="img-fluid mb-4" alt="">
-                </div>
-                <p class="mb-0">Configure the app to get violation data and alerts of the respective area.</p>
-                <br />
-                <a class="button" href="#"><b>Get Violation Alerts</b></a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3">
-            <div class="future-services text-center wow slideInUp" data-wow-duration="1.5s" style="visibility: visible; animation-duration: 1.5s; animation-name: slideInUp;">
-                <div class="future-img">
-                    <img src="../../assets/images/sms.png" class="img-fluid mb-4" alt="">
-                </div>
-                <!-- <h4 class="mb-3">Send SMS</h4> -->
-                <p class="mb-0">Share the area violation details with admin to inform and help resolve the issue.</p>
-                <br />
-                <a class="button" href="#"><b>Send SMS</b></a>
-            </div>
-        </div>
-    </div>
-</div>
