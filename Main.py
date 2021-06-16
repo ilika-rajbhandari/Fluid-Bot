@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 import xlsxwriter
+import pickle
 from nomralizeRGB import *
 from circularMask import *
 from timeConvert import *
@@ -39,7 +40,8 @@ applyDetection = True
 firstRun = True
 
 #Create new excel file and define its headers
-workbook = xlsxwriter.Workbook(str(videoName)+'.xlsx')
+xlsFileName = (videoName)+'.xlsx'
+workbook = xlsxwriter.Workbook(xlsFileName)
 worksheet = workbook.add_worksheet()
 worksheet.write('A1', 'Object ID') 
 worksheet.write('B1', 'Object Frame') 
@@ -142,10 +144,16 @@ while(1):
                 nominated_blockage_area = new_blockage_area
                 nominated_blockage_area_to_mask_area = (nominated_blockage_area / mask_area)*100
                 cv2.rectangle(frame,(nominatedBlockageX,nominatedBlockageY),(nominatedBlockageX+new_blockage_w,nominatedBlockageY+new_blockage_h),(255,0,255),2)
-                cv2.imwrite(str(videodirname+"\\"+"Frame_"+str(blockageCounter-1)+"_"+str(videoTime).replace(":","")+".jpg"),frame)
+                videoName = "Frame_"+str(blockageCounter-1)+"_"+str(videoTime).replace(":","")+".jpg"
+                cv2.imwrite(str(os.path.join(videodirname, videoName)),frame)
+                
                 continue
 
             if  recordTime != seconds and applyDetection:
+                '''
+                Writing the code to generate random data for flowrate for prototype. 
+                IoT device : Sensors for flow rate detection and transmitting data to central server
+                '''
                 flowRate = 1000 + np.random.rand(1) * 600  # Random data generated for flowrate.
                 print("Flow Rate : %s" % flowRate)
                 worksheet.write('A'+str(blockageCounter), str(blockageCounter-1)) 
@@ -189,9 +197,14 @@ while(1):
 
 
     ###Show processed images.
+    
     cv2.imshow('Processed Frame',frame)
 
 
+    #pklFile = videodirname + '.pkl'
+    #outfile = open(pklFile, 'wb')
+    #pickle.dump(worksheet, outfile)
+    #outfile.close()
     k = cv2.waitKey(30) & 0xff
     if k == 27 or ret:
         workbook.close() 
@@ -199,13 +212,6 @@ while(1):
 cap.release()
 cv2.destroyAllWindows()
 
-'''
-Writing the code to generate random data for flowrate for prototype. 
-IoT device : Sensors for flow rate detection and transmitting data to central server
-'''
-# rowCount = worksheet.max_row
-# for i in range(rowCount):
-#     flowRate = 1000 + np.random.rand(1) * 600 #Random data generated for flowrate.
-#     worksheet.write('J'+str(i), str(flowRate))
+
 workbook.close()
 find_defect(video_dir=videoName, output_dir=videodirname)
