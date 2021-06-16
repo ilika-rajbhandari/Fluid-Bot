@@ -8,15 +8,18 @@ from timeConvert import *
 from arcDetect import *
 from contorsHighlight import *
 from find_defect import *
+from corrosionDetection import *
 
 #User adjustable variables
 videoName = input("Please enter the full video title you wish to inspect [path]:\n")
-frameStart = int(input("Please enter the start frame number:\n"))
-circularMaskRadius = int(input("The circular mask maskRadius is calculated using frame_width/integer. The smaller the integer, the bigger the mask, and vice versa. Please enter the integer:"))
+# frameStart = int(input("Please enter the start frame number:\n"))
+# circularMaskRadius = int(input("The circular mask maskRadius is calculated using frame_width/integer. The smaller the integer, the bigger the mask, and vice versa. Please enter the integer:"))
+
+frameStart = 30
+circularMaskRadius = 30
 
 #String modifications to get rid of extension dot
 dirname = videoName.replace(".","")
-#videodirname = str(os.getcwd()+ "\\" + str(dirname))
 videodirname = str(os.path.join(os.getcwd(),str(dirname)))
 
 print("Video Report Path: %s" % videodirname)
@@ -214,4 +217,6 @@ cv2.destroyAllWindows()
 
 
 workbook.close()
-find_defect(video_dir=videoName, output_dir=videodirname)
+#find_defect(video_dir=videoName, output_dir=videodirname)
+print("Checking corrosion on the collected images in path [ %s ]" % videodirname)
+traverse_image(videodirname)
