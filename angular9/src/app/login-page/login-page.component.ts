@@ -31,4 +31,11 @@ export class LoginPageComponent implements OnInit {
       queryParams: { userType: userType },
     });
   }
+
+  public async goToComplaint() {
+    let userType;
+    await this.router.navigate([`/complaint`], {
+      queryParams: { userType: userType },
+    });
+  }
 }

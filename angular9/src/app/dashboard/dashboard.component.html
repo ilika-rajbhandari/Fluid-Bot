@@ -1,4 +1,6 @@
+
 <app-toasts></app-toasts>
+<app-header></app-header>
 
 
 <div class="change-location-wrapper">
@@ -98,65 +100,154 @@
       </ng-template>
     </div>
 
-<!-- Video content-->
+<!-- Info Boxes content-->
 <div class="container">
     <div class="row">
-      <div class="col-sm">
-        <div class="info-box animate__animated animate__flash animate__delay-1s" style="
-        background-color: #5aa3c5 !important;color:whitesmoke">
-           <span class="info-box-icon"><img src="./assets/images/pipeline.png"></span>
+    <!--Pie Chart-->
+    <div class="col-lg-7 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Per Capita Water requirement in Delhi</h4>
+            <canvas baseChart [chartType]="'pie'" [datasets]="doughnutPieChartData" [labels]="doughnutPieChartLabels" [options]="doughnutPieChartOptions" [colors]="doughnutPieChartColors"></canvas>
+            <h4 class="card-title">Total per capita water requirement= 274 lpcd</h4>
+          </div>
+        </div>
+</div>  
 
-           <div class="info-box-content">
-               <span class="info-box-number">{{ selectedArea.totalPipeLength }} KM</span>
-               <div class="progress">
-                   <div class="progress-bar" style="width: 80%"></div>
-               </div>
-               <span class="progress-description">
-                Length of pipe
-               </span>
-           </div>
-        </div>
-           <!-- /.info-box-content -->
-        </div>
+<!--Pie chart ends-->
       <div class="col-md">
-        <div class="info-box animate__animated animate__flash animate__delay-1s" style="
-        background-color: #5aa3c5 !important;color:whitesmoke">
-           <span class="info-box-icon"><img src="./assets/images/gas-pipeline.png"></span>
-
-           <div class="info-box-content">
-               <span class="info-box-number">{{ selectedArea.percentageOfBlockage }} %</span>
-               <div class="progress">
-                   <div class="progress-bar" style="width: 80%"></div>
+          <div class="flex-md-row">
+            <div class="info-box animate__animated animate__pulse animate__delay-1s" style="
+            background-color: #5aa3c5 !important;color:whitesmoke">
+               <span class="info-box-icon"><img src="./assets/images/pipeline.png"></span>
+    
+               <div class="info-box-content">
+                   <span class="info-box-number">{{ selectedArea.totalPipeLength }} KM</span>
+                   <div class="progress">
+                       <div class="progress-bar" style="width: 80%"></div>
+                   </div>
+                   <span class="progress-description">
+                    Length of pipe
+                   </span>
                </div>
-               <span class="progress-description">
-                Average Blocked Pipes
-               </span>
-           </div>
-        </div>
-      </div>
-      <div class="col-md">
-        <div class="info-box animate__animated animate__flash animate__delay-1s" style="
-        background-color: #5aa3c5 !important;color:whitesmoke">
-           <span class="info-box-icon"><img src="./assets/images/pressure-gauge.png"></span>
+            </div>               
+        </div> 
 
-           <div class="info-box-content">
-               <span class="info-box-number">{{ selectedArea.flowRate }} L/s</span>
-               <div class="progress">
-                   <div class="progress-bar" style="width: 80%"></div>
+
+        <!-- /.info-box-content -->
+
+
+    <div class="flex-row-md">
+      
+            <div class="info-box animate__animated animate__pulse animate__delay-1s" style="
+            background-color: #5aa3c5 !important;color:whitesmoke">
+               <span class="info-box-icon"><img src="./assets/images/gas-pipeline.png"></span>
+    
+               <div class="info-box-content">
+                   <span class="info-box-number">{{ selectedArea.percentageOfBlockage }} %</span>
+                   <div class="progress">
+                       <div class="progress-bar" style="width: 80%"></div>
+                   </div>
+                   <span class="progress-description">
+                    Average Blockage in Pipes
+                   </span>
                </div>
-               <span class="progress-description">
-                Average Flow Rate
-               </span>
-           </div>
-        </div>
-      </div>
+            </div>
     </div>
-  </div>
+              <div class="flex-md-row">
+                <div class="info-box animate__animated animate__pulse animate__delay-1s" style="
+                background-color: #5aa3c5 !important;color:whitesmoke">
+                   <span class="info-box-icon"><img src="./assets/images/pressure-gauge.png"></span>
+        
+                   <div class="info-box-content">
+                       <span class="info-box-number">{{ selectedArea.flowRate }} L/s</span>
+                       <div class="progress">
+                           <div class="progress-bar" style="width: 80%"></div>
+                       </div>
+                       <span class="progress-description">
+                        Average Flow Rate
+                       </span>
+                   </div>
+                </div>
+              </div>
+
+              <div class="flex-md-row">
+                <div class="info-box animate__animated animate__pulse animate__delay-1s" style="
+                background-color: #5aa3c5 !important;color:whitesmoke">
+                   <span class="info-box-icon"><img src="./assets/images/pipes.png"></span>
+        
+                   <div class="info-box-content">
+                       <span class="info-box-number">{{ selectedArea.percentageDefect }} %</span>
+                       <div class="progress">
+                           <div class="progress-bar" style="width: 80%"></div>
+                       </div>
+                       <span class="progress-description">
+                       Average Deterioration
+                       </span>
+                   </div>
+                </div>
+              </div>
+    
+        </div>
+    </div>
+            
+
+
+     
+
 
  <!--First container ends-->
+ <div class="sub-container"><span class="statistics input-group-addon"> Statistics</span></div>
 
- <div class= "container">
-     <div class="sub-container"><span class="statistics input-group-addon"> Statistics</span></div>
+ <div class= "graph-container">
+    <div class="row mt-3 bg-fancy video-info-area">
+    <div class="col-lg-6 col-md-6">
+        <div class="rplr-30">
+            <div class="c-share">
+                <input class="c-share__input" [class.active]="isActiveShare" type="checkbox" id="checkbox">
+                <label class="c-share__toggler" for="checkbox" (click)="isActiveShare = !isActiveShare;">
+                    <span class="c-share__icon"></span>
+                </label>
+                <ul class="c-share_options" data-title="Share">
+                    <li>Share as Image</li>
+                    <li>Share as CSV</li>
+                    <li>Share as PDF</li>
+                    <li>Share via Email</li>
+                </ul>
+            </div>
+            <div class="future-services services text-center wow slideInUp" data-wow-duration="1s" style="visibility: visible; animation-duration: 1s; animation-name: slideInUp;">
+                <highcharts-chart [Highcharts]="Highcharts" [options]="demandSupplyGraph" style="width: 100%; height: 400px; display: block;"></highcharts-chart>           
+            </div>
+        </div>
+    </div>
+
+   
+        <div class="col-lg-6 col-md-6">
+            <div class="rplr-30">
+                <div class="c-share">
+                    <input class="c-share__input" [class.active]="isActive" type="checkbox" id="checkbox">
+                    <label class="c-share__toggler" (click)="isActive = !isActive;" for="checkbox">
+                        <span class="c-share__icon"></span>
+                    </label>
+                    <ul class="c-share_options" data-title="Share">
+                        <li>Share as Image</li>
+                        <li>Share as CSV</li>
+                        <li>Share as PDF</li>
+                        <li>Share via Email</li>
+                    </ul>
+                </div>
+                <div class="future-services services  text-center wow slideInUp" data-wow-duration="0.5s" style="visibility: visible; animation-duration: 0.5s; animation-name: slideInUp;">
+                    <highcharts-chart [Highcharts]="Highcharts" [options]="blockageSupplyGraph" style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+                </div>
+            </div>
+        </div>
+     </div>
+ </div>
+
+ 
+
+ <div class= "graph-container">
+    
      
      <div class="row mt-3 bg-fancy video-info-area">
         <div class="col-lg-6 col-md-6">
@@ -203,6 +294,7 @@
 
 
 
+
 <ng-template #videocontent1 let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">Central Delhi</h4>
@@ -217,8 +309,10 @@
        <span class="input-group-addon">Diameter of Pipe: 10 M </span>
        <span class="input-group-addon">Current Age of Pipe: 98 years </span>
        <span class="input-group-addon">Pipe Material: Cast Iron </span>
-       <span class="input-group-addon">Flow Rate: 98 years </span>
+       <span class="input-group-addon">Flow Rate: 68 L/s </span>
        <span class="input-group-addon">Remaining useful life: 5 years </span>
+       <span class="input-group-addon">Pipe Deterioration: 60 % </span>
+       <span class="input-group-addon">Pipe Blockage: 40 % </span>
       </form>
     </div>
     <div class="modal-footer">
@@ -242,8 +336,10 @@
        <span class="input-group-addon">Diameter of Pipe: 10 M </span>
        <span class="input-group-addon">Current Age of Pipe: 98 years </span>
        <span class="input-group-addon">Pipe Material: Cast Iron </span>
-       <span class="input-group-addon">Flow Rate: 98 years </span>
+       <span class="input-group-addon">Flow Rate: 70 L/s </span>
        <span class="input-group-addon">Remaining useful life: 5 years </span>
+       <span class="input-group-addon">Pipe Deterioration: 50 % </span>
+       <span class="input-group-addon">Pipe Blockage: 30 % </span>
       </form>
     </div>
     <div class="modal-footer">
@@ -265,8 +361,10 @@
        <span class="input-group-addon">Diameter of Pipe: 10 M </span>
        <span class="input-group-addon">Current Age of Pipe: 98 years </span>
        <span class="input-group-addon">Pipe Material: Cast Iron </span>
-       <span class="input-group-addon">Flow Rate: 98 years </span>
+       <span class="input-group-addon">Flow Rate: 66 L/s </span>
        <span class="input-group-addon">Remaining useful life: 5 years </span>
+       <span class="input-group-addon">Pipe Deterioration: 54 % </span>
+       <span class="input-group-addon">Pipe Blockage: 33 % </span>
       </form>
     </div>
     <div class="modal-footer">
@@ -288,8 +386,10 @@
        <span class="input-group-addon">Diameter of Pipe: 10 M </span>
        <span class="input-group-addon">Current Age of Pipe: 98 years </span>
        <span class="input-group-addon">Pipe Material: Cast Iron </span>
-       <span class="input-group-addon">Flow Rate: 98 years </span>
+       <span class="input-group-addon">Flow Rate: 70 L/s </span>
        <span class="input-group-addon">Remaining useful life: 5 years </span>
+       <span class="input-group-addon">Pipe Deterioration: 67 % </span>
+       <span class="input-group-addon">Pipe Blockage: 49 % </span>
       </form>
     </div>
     <div class="modal-footer">
@@ -297,49 +397,65 @@
     </div>
   </ng-template>
 
-
+ <div class="container">
+     <div class="form-group">
+        <div class="sub-container"><span class="statistics input-group-addon recommendations">Recommendations</span></div>
+         <div class="flex-row row-3">
+           <div class="col-md-6 recommendations">
+            <div class="info-box animate__animated animate__lightSpeedInRight animate__delay-2s recommendations" style="
+            background-color: #305A68 !important;color:whitesmoke">    
+               <div class="info-box-content recommendations">
+                   <p class="info-box-number recommendations" *ngIf="islocationChanged; else elseBlock">Pipes are deteriorated more than 80%. Maintenance required.</p>
+                   <ng-template #elseBlock><p class="info-box-number recommendations">
+                    Due to weather forecast about heavy rain, maintenance might be required in upcoming month. 
+                   </p></ng-template>
+               </div>
+           </div>
+         </div>
+     </div>
+ </div>
 
  <section class="live-video-track-wrapper conection-shap" id="liveVideoSection">
     <div class="banner just-anim">
 
         <div class="my-container container">
-
-            <div class="video-with-details row">  
-                <div class="video-area col-sm">                                               
+            <span class="liveView">Live</span>
+       <img class="liveView" src="./assets/images/icons8-live-video-on.gif">
+            <div class="video-with-details flex-lg-row">  
+                <div class="video-area col-md-3">                                               
                     
                          <div class= "video-button">                         
                                 <video src="{{currentVideo}}" ngbPopover="Central Dlehi"
-  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="200px" height="100px" autoplay loop></video> <button class="btn bg-transparent" (click)="open(videocontent1)"></button></div></div>
+  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="310px" height="100px" autoplay loop></video> <button class="btn bg-transparent" (click)="open(videocontent1)"></button></div></div>
 
-  <div class="video-area col-sm">
+  <div class="video-area col-md-3">
         <div class="video-button">
               <video src="{{currentVideo}}" ngbPopover="South Delhi"
-  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="200px" height="100px" autoplay loop></video><button class="btn bg-transparent" (click)="open(videocontent2)"></button></div></div>
+  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="310px" height="100px" autoplay loop></video><button class="btn bg-transparent" (click)="open(videocontent2)"></button></div></div>
 
-  <div class="video-area col-sm">
+  <div class="video-area col-md-3">
         <div class="video-button">             
                                 <video src="{{currentVideo}}" ngbPopover="West Delhi"
-  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="200px" height="100px" autoplay loop></video><button class="btn bg-transparent" (click)="open(videocontent3)"></button></div></div>
+  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="310px" height="100px" autoplay loop></video><button class="btn bg-transparent" (click)="open(videocontent3)"></button></div></div>
 
-  <div class="video-area col-sm">
+  <div class="video-area najafgarh col-md-3">
   <div class="video-button"> 
   <video src="{{currentVideo}}" ngbPopover="Najafgarh"
-  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="200px" height="100px" autoplay loop></video><button class="btn bg-transparent" (click)="open(videocontent4)"></button></div></div>                            
+  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="310px" height="100px" autoplay loop></video><button class="btn bg-transparent" (click)="open(videocontent4)"></button></div></div>                            
                                 
                         </div>
                         </div>
                    </div>
-                   <div id="video-details">You're watching {{ selectedArea.locality }} </div>
-                    <!-- Video container end here-->
-                    
-                        <!-- <div class="col-lg-6 grid-margin stretch-card">
-                            <div class="card">
-                              <div class="card-body">
-                                <h4 class="card-title">Remaining Pipe Time Span(in Years)</h4>
-                                <canvas baseChart [chartType]="'pie'" [datasets]="doughnutPieChartData" [labels]="doughnutPieChartLabels" [options]="doughnutPieChartOptions" [colors]="doughnutPieChartColors"></canvas>
-                              </div>
-                            </div>
-                    </div>      -->               
+
+                   <div class="areaSelection">
+                       <span>Central Delhi</span>
+                       <span>South Delhi</span>
+                       <span>West Delhi</span>
+                       <span>Najafgarh</span>
+                   </div>
+                   <div id="video-details">You're watching {{ selectedArea.locality }} </div>  
 
 </section>
+
+
 

@@ -8,7 +8,7 @@ import {
 import { ApiService } from '../api.service';
 import {
   StatsData, mockData, areaData, violationCountGraphData1, distanceViolationData1,
-  violationCountGraphData2, distanceViolationData2, areaLocality, locality
+  violationCountGraphData2, distanceViolationData2, areaLocality, locality,  blockageDemandSupply, demandSupply, blockageSuppy
 } from '../stats-data';
 import * as Highcharts from 'highcharts';
 import { ToastService } from '../_services/toast.service';
@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit, AfterContentInit {
   isPlay = false;
   isCreateAlert: boolean;
   violationLevel;
+  islocationChanged: Boolean;
   isPhoneDisabled = true;
   isEmailDisabled = false;
   pipeblockage;
@@ -49,6 +50,8 @@ export class DashboardComponent implements OnInit, AfterContentInit {
   barGraph2: {};
   selectedLineChart: {};
   selectedGraph: {};
+  demandSupplyGraph: {};
+  blockageSupplyGraph: {};
   Highcharts = Highcharts;
 
 
@@ -64,6 +67,7 @@ export class DashboardComponent implements OnInit, AfterContentInit {
     this.flowrate = 200;
     this.isShareOpen = false;
     this.isShareOpen1 = false;
+    this.islocationChanged =false;
   }
 
   showSuccess(headerText, successMsg) {
@@ -84,8 +88,23 @@ export class DashboardComponent implements OnInit, AfterContentInit {
     });
   }
 
+  showAlert(){
+    this.toastService.show('Maintenance required in Najafgarh. For more information, visit the area information.',{
+      classname: 'test',
+      titleClass: 'maintenanceAlert',
+      messageClass: 'maintenanceAlert',
+      delay: 2000,
+      autohide: false,
+      headertext: 'Maintenance ALERT !'
+    });
+  }
+
+  
+
+
   public ngOnInit(): void {
     this.showError();
+    this.showAlert();
     // mockData
     //  this.graphicalData = mockData;
     this.selectedArea = areaData[1];
@@ -94,6 +113,8 @@ export class DashboardComponent implements OnInit, AfterContentInit {
     this.lineChart2 = violationCountGraphData2;
     this.barGraph2 = distanceViolationData2;
     this.selectedLineChart = this.lineChart1;
+    this.blockageSupplyGraph = blockageSuppy;
+    this.demandSupplyGraph = demandSupply;
     this.selectedGraph = this.barGraph1;
 
     this.apiService.getData().subscribe((data: StatsData[]) => {
@@ -108,13 +129,14 @@ export class DashboardComponent implements OnInit, AfterContentInit {
       this.covidSummary = data;
     });
   }
+
   doughnutPieChartData = [
     {
-      data: [20, 10, 30, 20, 10],
+      data: [172, 47, 52, 3],
     }
   ];
 
-  doughnutPieChartLabels = ["East Delhi", "West Delhi", "South Delhi", "Central Delhi","North Delhi"];
+  doughnutPieChartLabels = ["Domestic", "Industrial, Comercial, Community", "Embassies, hotels, airports, railways, floating population", "Fire Stations"];
 
   doughnutPieChartOptions = {
     responsive: true,
@@ -130,8 +152,7 @@ export class DashboardComponent implements OnInit, AfterContentInit {
         '#25425F',
         '#008A09',
         '#E6B800',
-        '#D9182D',
-        '#0093F5'
+        '#D9182D'
       ],
       borderColor: [
         'rgba(255, 255, 255, 1)'
@@ -139,10 +160,14 @@ export class DashboardComponent implements OnInit, AfterContentInit {
     }
   ];
 
+
+  
+
   ngAfterContentInit() { }
 
   openChangeLocationPopup() {
     this.isChangeLocation = true;
+    this.islocationChanged = true;
   }
 
   closeChangeLocationPopup() {
@@ -218,9 +243,12 @@ export class DashboardComponent implements OnInit, AfterContentInit {
     this.isVideoLoaded = false;
     if (this.selectedArea === areaData[0]) {
       this.isVideoLoaded = true;
-      this.currentVideo = '../../assets/video/Output_SocDis_Area_2.mp4';
+      this.currentVideo = '../../assets/video/PipeFootage1.mp4';
     } else {
       this.currentVideo = '../../assets/video/PipeFootage1.mp4';
     }
   }
+
+  
+  
 }

@@ -1,5 +1,5 @@
 .live-video-track-wrapper {
-  background: url(../../assets/images/ai-bg.jpg) no-repeat;
+  background: url("/src/assets/images/ai-bg.jpg") no-repeat;
   background-size: cover;
   background-attachment: fixed;
 }
