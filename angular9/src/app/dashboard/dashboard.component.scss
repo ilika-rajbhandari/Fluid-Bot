@@ -25,23 +25,108 @@ button.btn.bg-transparent {
   width: 530px 
 }
 
+::ng-deep .test .toast-header {
+  
+  background: url("/assets/images/maintenance.png");
+  background-repeat: no-repeat; 
+   background-size: 30px 30px;
+   color: white;
+   text-align: center;
+   padding-left: 45px;
+   font-size: 20px;
+  background-position: 5px 3px; 
+  background-color:cornflowerblue;
+
+}
+
+::ng-deep .test .toast-body {
+  // margin-left: 30px;
+  font-size: 20px;
+
+}
+.info-box-content.recommendations {
+  margin-left: 10px;
+}
+.info-box-number.recommendations {
+  margin-top:20px;
+}
+
+.info-box-number.recommendations:hover {
+  font-size: 25px;
+}
+
+@keyframes bounce {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-25px);
+  }
+}
+@-webkit-keyframes bounce {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-25px);
+  }
+}
+
+
+span.statistics.input-group-addon.recommendations {
+  width: 1117px;
+  margin-left: -14px;
+  margin-bottom: 15px;
+}
+
+::ng-deep ngb-toast.test.toast.show {
+  margin-left: 68%;
+  margin-top: 45%;
+  background-color: blue;
+  color: white;  
+} 
+
+.areaSelection {
+  margin-top: -2%;
+}
+
+.areaSelection span {
+  padding-right: 7%;
+  padding-left: 10%;
+}
+.video-area.najafgarh.col-md-3 {
+  border: 2px solid red;
+}
 .container {
   margin-top:  20px;
 }
 
-section#liveVideoSection {
-  margin-left: 10%;
+span.liveView {
+  /* align-items: center; */
+  font-size: 50px;
+  /* margin: 10px auto; */
+  margin-left: 40%;
+  padding: 10px;
+  /* justify-content: center; */
 }
+section#liveVideoSection {
 
-.sub-container {
-  background-color: skyblue;
-  background-image: linear-gradient(skyblue, blue);
+}
+.graph-container {
+  width: 1085px;
+  margin-left: 15px;
 }
 
 .statistics {
   height:  60px;
   font-size: 40px;
   box-shadow: 0 2px 6px #d0d0d0;
+  background-color: #efefef;
+  margin-top: 10px;
+}
+
+::ng-deep .maintenanceAlert {
+  margin-left: 100px;
 }
 
 .video-button {position: relative;}
@@ -54,9 +139,7 @@ section#liveVideoSection {
   max-width: 800px;
   margin-top: 20px;
 }
-.col-lg-6.grid-margin.stretch-card {
-  margin-top: -12%;
-}
+
 
 .bg-fancy {
   padding: 1rem 0 !important;

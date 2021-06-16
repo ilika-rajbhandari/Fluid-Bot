@@ -22,6 +22,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastComponent } from './toast/toast.component';
 import { DynamicClassDirective } from './customDirective';
+import { ComplaintComponent } from './complaint/complaint.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { DynamicClassDirective } from './customDirective';
     LandingComponent,
     NotificationsComponent,
     ToastComponent,
-    DynamicClassDirective
+    DynamicClassDirective,
+    ComplaintComponent
   ],
   imports: [
     BrowserModule,

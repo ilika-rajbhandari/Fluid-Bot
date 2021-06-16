@@ -86,4 +86,39 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
   
 
+  @font-face {
+    font-family: Poppins-Regular;
+    src: url('/src/assets/fonts/poppins/Poppins-Regular.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Medium;
+    src: url('/src/assets/fonts/poppins/Poppins-Medium.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Bold;
+    src: url('/src/assets/fonts/poppins/Poppins-Bold.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-SemiBold;
+    src: url('/src/assets/fonts/poppins/Poppins-SemiBold.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Montserrat-Bold;
+    src: url('/src/assets/fonts/poppins/Montserrat-Bold.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Montserrat-SemiBold;
+    src: url('/src/assets/fonts/poppins/Montserrat-SemiBold.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Montserrat-Regular;
+    src: url('/src/assets/fonts/poppins/Montserrat-Regular.ttf'); 
+  }
+  
   
