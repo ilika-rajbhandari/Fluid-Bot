@@ -13,6 +13,8 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.preprocessing import image
 from time import time
 import red_particles
+import Keras_Cracks_identification
+
 con_base = VGG16(weights='imagenet',include_top=False,input_shape=(150, 150, 3))
 con_base.summary()
 
@@ -28,7 +30,8 @@ def writeXlsxFile(path):
 
         #Write headers.
         worksheet.write(0, 0, 'File Name')
-        worksheet.write(0, 1, 'Rusted/Not Rusted')
+        worksheet.write(0, 1, '% Rust')
+		
 
         #Write dict data
         for number_of_frame, (frame_name, result) in enumerate(REPORT_DICT.items(), start=1):
@@ -73,8 +76,9 @@ def rust_check(image_to_check):
     image_test =image_test.astype('float32') / 255
     rust_prob = model.predict(image_test)
     image_name = os.path.basename(image_path)
+    rust_percent = 100 * rust_prob[0]
     if (rust_prob > 0.50):
-        REPORT_DICT.update({'%s' % image_name: 'RUSTED'})
+        REPORT_DICT.update({'%s' % image_name: '%s' % rust_percent})
         print("There is Rust in the image %s" % image_name)
         depth = 15
         thresh_hold = 0.8
@@ -83,7 +87,7 @@ def rust_check(image_to_check):
         img = red_particles.scale_image(image_path, max_size=1000000)
         # red_particles.energy_gLCM(img,depth,thresh_hold,distance,thresh)
     else:
-        REPORT_DICT.update({'%s' % image_name : 'NOT RUSTED'})
+        REPORT_DICT.update({'%s' % image_name : '%s'% rust_percent})
         print("This is a no Rust in the image")
 
 def traverse_image(path):
@@ -91,6 +95,10 @@ def traverse_image(path):
         if f.endswith('.jpg'):
             image_check_path = os.path.join(path, f)
             rust_check(image_check_path)
+            crack_percentage = Keras_Cracks_indentification.crack_prediction(image_check_path)
+            crack_val = (100*score)
+            print(crack_val)
+						
             print ("Completed rust check for images : %s" % f)
     print ("Results : %s" % REPORT_DICT)
     writeXlsxFile(path)
