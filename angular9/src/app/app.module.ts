@@ -48,7 +48,7 @@ import { ComplaintComponent } from './complaint/complaint.component';
     NgbModule,
     ChartsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDqgTqghMT9TnKMPOJt-4wAEgGcoUgMKE8',
+      apiKey: 'AIzaSyBfJb-a7LaxigrV-xeA0JDBWlFyXB--5nc',
       libraries: ['places']
     }),
     BrowserAnimationsModule

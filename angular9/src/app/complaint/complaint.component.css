@@ -1,0 +1,17 @@
+button.btn.btn-primary {
+    margin: 20px;
+}
+
+
+app-toasts.ngb-toasts {
+    margin-right: 43%;
+    width: 300px;
+    text-align: center;
+}
+form.ng-untouched.ng-pristine.ng-valid {
+    margin-top: 1%;
+}
+
+.container {
+    background: url('/src/assets/images/bg-02.png');
+}

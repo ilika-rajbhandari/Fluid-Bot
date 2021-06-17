@@ -50,6 +50,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
   
   .change-location-wrapper .new-location-wrapper {
+    height: 550px;
     background: #ffffff;
     padding: 1rem;
     max-width: 500px;
