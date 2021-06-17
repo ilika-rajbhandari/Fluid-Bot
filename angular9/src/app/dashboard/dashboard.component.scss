@@ -4,6 +4,26 @@ a {
   color: #ffffff !important;
 }
 
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 13px;
+  -webkit-animation: 1s blinkDot ease infinite;
+  -moz-animation: 1s blinkDot ease infinite;
+  -ms-animation: 1s blinkDot ease infinite;
+  -o-animation: 1s blinkDot ease infinite;
+  animation: 1s blinkDot ease infinite;
+}
+@keyframes blinkDot {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+
 .live-video-track-wrapper {
   /* background: url(../../assets/images/ai-bg.jpg) no-repeat;
   background-size: cover;
@@ -13,6 +33,22 @@ a {
   margin-top: -50%;
 }
 
+p.recommendations {
+  padding: 9px;
+  color: black;
+}
+
+.oval {
+  width: 731px;
+  height: 63px;
+  background: #f2e65c;
+  border: 5px red  solid;
+  animation: blink 1s;
+  animation-iteration-count: 30; 
+   
+}
+@keyframes blink { 50% { border-color:#fff ; }  }
+
 button.btn.bg-transparent {
   position: absolute;
   /* margin-left: 10%; */
@@ -21,22 +57,21 @@ button.btn.bg-transparent {
   height: 100%;
   width: 100%;
 }
+
+button#updateLocation {
+  margin-top: 61px;
+  margin-left: 281px;
+}
 ::ng-deep .modal-content {
   width: 530px 
 }
+agm-map {
+  height: 300px;
+}
 
-::ng-deep .test .toast-header {
-  
-  background: url("/assets/images/maintenance.png");
-  background-repeat: no-repeat; 
-   background-size: 30px 30px;
-   color: white;
-   text-align: center;
-   padding-left: 45px;
-   font-size: 20px;
-  background-position: 5px 3px; 
-  background-color:cornflowerblue;
-
+.col-md-6.recommendations {
+  margin-top: 16px;
+  margin-left: -27px;
 }
 
 ::ng-deep .test .toast-body {
@@ -49,10 +84,6 @@ button.btn.bg-transparent {
 }
 .info-box-number.recommendations {
   margin-top:20px;
-}
-
-.info-box-number.recommendations:hover {
-  font-size: 25px;
 }
 
 @keyframes bounce {
@@ -81,9 +112,7 @@ span.statistics.input-group-addon.recommendations {
 
 ::ng-deep ngb-toast.test.toast.show {
   margin-left: 68%;
-  margin-top: 45%;
-  background-color: blue;
-  color: white;  
+  margin-top: 35%;  
 } 
 
 .areaSelection {
@@ -101,28 +130,12 @@ span.statistics.input-group-addon.recommendations {
   margin-top:  20px;
 }
 
-span.liveView {
-  /* align-items: center; */
-  font-size: 50px;
-  /* margin: 10px auto; */
-  margin-left: 40%;
-  padding: 10px;
-  /* justify-content: center; */
-}
 section#liveVideoSection {
 
 }
 .graph-container {
   width: 1085px;
   margin-left: 15px;
-}
-
-.statistics {
-  height:  60px;
-  font-size: 40px;
-  box-shadow: 0 2px 6px #d0d0d0;
-  background-color: #efefef;
-  margin-top: 10px;
 }
 
 ::ng-deep .maintenanceAlert {
@@ -143,13 +156,25 @@ section#liveVideoSection {
 
 .bg-fancy {
   padding: 1rem 0 !important;
-  background: #efefef;
+  background: #407a95;
 }
 
 .live-video-track-wrapper .rplr-30 {
   background: white;
 }
+.live {
+  font-size: 40px;
+  margin-left: -12px;
+  color: #040483;
+}
 
+.sub-container {
+  color: #040483;
+  margin-top: 27px;
+  font-size: 40px;
+  margin-bottom: -10px;
+  margin-left: -15px;
+}
 .live-video-track-wrapper .openLocation {
   padding: 1rem 1.5rem;
   border: 0;
@@ -161,7 +186,9 @@ section#liveVideoSection {
   border-radius: 25px 25px 0 0;
 }
 
-
+span.info {
+  color:  black;
+}
 .my-container {
   max-width: 1300px;
   margin: 0 auto;
@@ -363,6 +390,7 @@ button.btn.btn-primary {
 .input-group input + span.input-group-addon {
   float: left;
   width: 50%;
+  border: 1px solid #fff;
 }
 video {
   border: 5px solid white;
@@ -377,7 +405,7 @@ video {
 .createAlertOverlay {
 
   .new-location-wrapper {
-    max-height: 550px;
+    height: 800px;
     padding: 2rem;
     padding-top: 10px;
   }
