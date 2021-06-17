@@ -29,14 +29,19 @@ def writeXlsxFile(path):
         worksheet = workbook.add_worksheet()
 
         #Write headers.
-        worksheet.write(0, 0, 'File Name')
+        worksheet.write(0, 0, 'Frame Name')
         worksheet.write(0, 1, '% Rust')
-		
+        worksheet.write(0, 2, '% Crack')
 
         #Write dict data
-        for number_of_frame, (frame_name, result) in enumerate(REPORT_DICT.items(), start=1):
-            worksheet.write(number_of_frame, 0, frame_name)
-            worksheet.write(number_of_frame, 1, result)
+        row = 1
+        for frame in REPORT_DICT.keys():
+            col = 0
+            worksheet.write(row, col, frame)
+            for percent in REPORT_DICT[frame]:
+                col += 1
+                worksheet.write(row, col, percent)
+            row += 1
 
 def prototyping():
     prototype = models.Sequential()
@@ -78,7 +83,6 @@ def rust_check(image_to_check):
     image_name = os.path.basename(image_path)
     rust_percent = 100 * rust_prob[0]
     if (rust_prob > 0.50):
-        REPORT_DICT.update({'%s' % image_name: '%s' % rust_percent})
         print("There is Rust in the image %s" % image_name)
         depth = 15
         thresh_hold = 0.8
@@ -87,18 +91,18 @@ def rust_check(image_to_check):
         img = red_particles.scale_image(image_path, max_size=1000000)
         # red_particles.energy_gLCM(img,depth,thresh_hold,distance,thresh)
     else:
-        REPORT_DICT.update({'%s' % image_name : '%s'% rust_percent})
         print("This is a no Rust in the image")
+    return rust_percent
 
 def traverse_image(path):
     for f in os.listdir(path):
         if f.endswith('.jpg'):
             image_check_path = os.path.join(path, f)
-            rust_check(image_check_path)
-            crack_percentage = Keras_Cracks_indentification.crack_prediction(image_check_path)
-            crack_val = (100*score)
-            print(crack_val)
-						
+            rust_percent = rust_check(image_check_path)
+            crack_val = Keras_Cracks_identification.crack_prediction(image_check_path)
+            crack_percentage = (100 * crack_val)
+            image_name = os.path.basename(image_check_path)
+            REPORT_DICT.update({'%s' % image_name: ['%s' % rust_percent, '%s' % crack_percentage]})
             print ("Completed rust check for images : %s" % f)
     print ("Results : %s" % REPORT_DICT)
     writeXlsxFile(path)

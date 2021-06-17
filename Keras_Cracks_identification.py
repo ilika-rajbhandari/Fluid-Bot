@@ -3,7 +3,7 @@
 
 # In[1]:
 
-
+import os
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
@@ -12,7 +12,7 @@ from tensorflow.keras import layers
 # In[2]:
 
 
-directory = "C:/Fluid-Bot/ImageSet_Cracks"
+directory = os.path.join(os.getcwd(), "ImageSet_Cracks")
 
 
 # In[3]:
@@ -168,7 +168,6 @@ model.compile(
     optimizer=keras.optimizers.Adam(1e-3),
     loss="binary_crossentropy",
     metrics=["accuracy"],
-	options = run_opts,
 )
 model.fit(
     ds_train, epochs=epochs, callbacks=callbacks, 
@@ -176,28 +175,13 @@ model.fit(
 
 
 # In[35]:
-
-
-
-
-
-#img = keras.preprocessing.image.load_img(
-#    "C:/Users/dgarg/Desktop/aging/corrosion.jpg", target_size=image_size
-#)
-
-
-
 def crack_prediction(path):
-	img_array = keras.preprocessing.image.img_to_array(path)
-	img_array = tf.expand_dims(img_array, 0)  # Create batch axis
-
-	predictions = model.predict(img_array)
-	score = predictions[0]
-	return score
-
-
-# In[ ]:
-
+    img = keras.preprocessing.image.load_img(path, target_size=image_size)
+    img_array = keras.preprocessing.image.img_to_array(img)
+    img_array = tf.expand_dims(img_array, 0)  # Create batch axis
+    predictions = model.predict(img_array)
+    score = predictions[0]
+    return score
 
 
 

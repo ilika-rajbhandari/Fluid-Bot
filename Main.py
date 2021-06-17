@@ -9,6 +9,8 @@ from arcDetect import *
 from contorsHighlight import *
 from find_defect import *
 from corrosionDetection import *
+from PipeDataSet_Create import *
+from finalReport import *
 
 #User adjustable variables
 videoName = input("Please enter the full video title you wish to inspect [path]:\n")
@@ -43,7 +45,7 @@ applyDetection = True
 firstRun = True
 
 #Create new excel file and define its headers
-xlsFileName = (videoName)+'.xlsx'
+xlsFileName = os.path.join((videodirname), 'blockage_flow_rate.xlsx')
 workbook = xlsxwriter.Workbook(xlsFileName)
 worksheet = workbook.add_worksheet()
 worksheet.write('A1', 'Object ID') 
@@ -139,7 +141,7 @@ while(1):
 
             if new_blockage_area > mask_area or new_blockage_area < 200:
                 continue
-            if new_blockage_area > nominated_blockage_area:
+            if new_blockage_area > (nominated_blockage_area):
                 nominatedBlockageY = new_blockage_y
                 nominatedBlockageX = new_blockage_x
                 nominatedBlockageH = new_blockage_h
@@ -147,10 +149,10 @@ while(1):
                 nominated_blockage_area = new_blockage_area
                 nominated_blockage_area_to_mask_area = (nominated_blockage_area / mask_area)*100
                 cv2.rectangle(frame,(nominatedBlockageX,nominatedBlockageY),(nominatedBlockageX+new_blockage_w,nominatedBlockageY+new_blockage_h),(255,0,255),2)
-                videoName = "Frame_"+str(blockageCounter-1)+"_"+str(videoTime).replace(":","")+".jpg"
-                cv2.imwrite(str(os.path.join(videodirname, videoName)),frame)
-                
-                continue
+                if blockageCounter < 28:
+                    videoName = "Frame_"+str(blockageCounter-1)+".jpg"
+                    cv2.imwrite(str(os.path.join(videodirname, videoName)),frame)
+                    continue
 
             if  recordTime != seconds and applyDetection:
                 '''
@@ -217,6 +219,8 @@ cv2.destroyAllWindows()
 
 
 workbook.close()
-#find_defect(video_dir=videoName, output_dir=videodirname)
+# find_defect(video_dir=videoName, output_dir=videodirname)
+pipeData(videodirname)
 print("Checking corrosion on the collected images in path [ %s ]" % videodirname)
 traverse_image(videodirname)
+combine_reports(videodirname)
