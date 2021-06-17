@@ -88,7 +88,7 @@ export const areaData: StatsData[] = [
   {
     id: '1',
     timestamp: 'June 16 2021 03:52:00',
-    totalPipeLength: '3000',
+    totalPipeLength: '26',
     noOfPipesNeedAttention: '15',
     locality: 'North Delhi Municipal Corporation',
     latitude: '28.491',
@@ -104,7 +104,7 @@ export const areaData: StatsData[] = [
   {
     id: '2',
     timestamp: 'June 18 2021 03:52:00',
-    totalPipeLength: '2500',
+    totalPipeLength: '22',
     noOfPipesNeedAttention: '30',
     locality: 'South Delhi Municipal Corporation',
     latitude: '28.491',
@@ -124,7 +124,7 @@ export const mockData: StatsData[] = [
   {
     id: '1',
     timestamp: 'June 16 2021 03:52:00',
-    totalPipeLength: '3000',
+    totalPipeLength: '20',
     noOfPipesNeedAttention: '15',
     locality: 'City',
     latitude: '28.491',
@@ -568,3 +568,60 @@ series: [{
     }
 }]
 }
+
+export const lineChart ={
+  title: {
+    text: 'Deterioration and Supply'
+},
+
+yAxis: {
+    title: {
+        text: 'Number per Capita'
+    }
+},
+
+xAxis: {
+    accessibility: {
+        rangeDescription: 'Range: 1 to 30'
+    }
+},
+legend: {
+    layout: 'vertical',
+    align: 'right',
+    verticalAlign: 'middle'
+},
+
+plotOptions: {
+    series: {
+        label: {
+            connectorAllowed: false
+        },
+        pointStart: 1
+    }
+},
+
+series: [{
+    name: 'Supply',
+    data: [1.8, 1.8, 2, 2.1, 1.6, 2, 1.9, 2.2, 2.1, 2.2, 1.8, 2.1, 2.2, 2.1, 2.4, 2.1, 1.9, 2.1, 2.2, 1.5, 1.4, 2, 1.8, 1.75, 2.1, 1.98, 1.99, 2.3, 2.1, 1.9]
+}, {
+    name: 'Pipe  Deterioration',
+    data: [1, 1.1, 1.1, 1.2, 1, 1.2, 1.2, 1.3, 1.4, 1.9, 1.9, 1.4, 1.2, 1.3, 1.6, 1.6, 1.2, 1.2, 1.8, 1.1, 1.1, 1.2, 1.3, 1.2, 1.3, 1.2, 1.4, 1.8, 1.6,1.4]
+}],
+
+responsive: {
+    rules: [{
+        condition: {
+            maxWidth: 500
+        },
+        chartOptions: {
+            legend: {
+                layout: 'horizontal',
+                align: 'center',
+                verticalAlign: 'bottom'
+            }
+        }
+    }]
+}
+
+}
+

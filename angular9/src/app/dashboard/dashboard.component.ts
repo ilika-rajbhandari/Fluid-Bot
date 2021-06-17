@@ -4,15 +4,18 @@ import {
   AfterContentInit,
   ElementRef,
   ViewChild,
+  NgZone,
 } from '@angular/core';
 import { ApiService } from '../api.service';
 import {
-  StatsData, mockData, areaData, violationCountGraphData1, distanceViolationData1,
-  violationCountGraphData2, distanceViolationData2, areaLocality, locality,  blockageDemandSupply, demandSupply, blockageSuppy
+  StatsData, areaData, violationCountGraphData1, distanceViolationData1,
+  violationCountGraphData2, distanceViolationData2, areaLocality, locality, demandSupply, lineChart
 } from '../stats-data';
 import * as Highcharts from 'highcharts';
 import { ToastService } from '../_services/toast.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { formatDate } from '@angular/common';
+import { MapsAPILoader, MouseEvent } from '@agm/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,6 +30,9 @@ export class DashboardComponent implements OnInit, AfterContentInit {
   public selectedLocality: locality;
   public selectedArea: StatsData;
   currentVideo: string;
+  areaVideo1: string;
+  areaVideo2: string;
+  areaVideo3: string;
   isVideoLoaded: boolean;
   isPlay = false;
   isCreateAlert: boolean;
@@ -43,7 +49,8 @@ export class DashboardComponent implements OnInit, AfterContentInit {
   isActive;
   isActiveShare;
   closeResult = '';
-
+  today = new Date();
+  todaysDataTime = '';
   lineChart1: {};
   barGraph1: {};
   lineChart2: {};
@@ -54,20 +61,34 @@ export class DashboardComponent implements OnInit, AfterContentInit {
   blockageSupplyGraph: {};
   Highcharts = Highcharts;
 
+  //map
+  title: string = 'AGM project';
+  latitude: number;
+  longitude: number;
+  zoom: number;
+  address: string;
+  private geoCoder;
 
-  @ViewChild('videoPlayer', { static: false }) videoplayer: ElementRef;
+  @ViewChild('search')
+  public searchElementRef: ElementRef;
 
-  constructor(private apiService: ApiService, public toastService: ToastService, private modalService: NgbModal) {
+  //@ViewChild('videoPlayer', { static: false }) videoplayer: ElementRef;
+
+  constructor(private apiService: ApiService, public toastService: ToastService, private modalService: NgbModal, private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone) {
     this.isChangeLocation = false;
-    this.currentVideo = '../../assets/video/PipeFootage1.mp4';
+    this.currentVideo = '../../assets/video/PipeFootage2.mp4';
+    this.areaVideo1 = '../../assets/video/PipeFootage3.mp4';
+    this.areaVideo2 = '../../assets/video/PipeFootage1.mp4'; 
+    this.areaVideo3 = '../../assets/video/PipeFootage4.mp4';
     this.isVideoLoaded = true;
-    this.violationLevel = 20;
     this.pipeblockage = 80;
     this.pipetimespan = 2;
-    this.flowrate = 200;
+    this.flowrate = 70;
     this.isShareOpen = false;
     this.isShareOpen1 = false;
     this.islocationChanged =false;
+    this.todaysDataTime = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
   }
 
   showSuccess(headerText, successMsg) {
@@ -90,7 +111,7 @@ export class DashboardComponent implements OnInit, AfterContentInit {
 
   showAlert(){
     this.toastService.show('Maintenance required in Najafgarh. For more information, visit the area information.',{
-      classname: 'test',
+      classname: 'bg-danger text-light test',
       titleClass: 'maintenanceAlert',
       messageClass: 'maintenanceAlert',
       delay: 2000,
@@ -99,12 +120,71 @@ export class DashboardComponent implements OnInit, AfterContentInit {
     });
   }
 
-  
+  //map
+   private setCurrentLocation() {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+        this.zoom = 8;
+        this.getAddress(this.latitude, this.longitude);
+      });
+    }
+  }
 
+  markerDragEnd($event: MouseEvent) {
+    console.log($event);
+    this.latitude = $event.coords.lat;
+    this.longitude = $event.coords.lng;
+    this.getAddress(this.latitude, this.longitude);
+  } 
+
+  getAddress(latitude, longitude) {
+    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+      console.log(results);
+      console.log(status);
+      if (status === 'OK') {
+        if (results[0]) {
+          this.zoom = 12;
+          this.address = results[0].formatted_address;
+        } else {
+          window.alert('No results found');
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+      }
+
+    });
+  }
 
   public ngOnInit(): void {
     this.showError();
     this.showAlert();
+    //map
+    this.setCurrentLocation();
+    this.mapsAPILoader.load().then(() => {
+      this.setCurrentLocation();
+      this.geoCoder = new google.maps.Geocoder;
+
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
+      autocomplete.addListener("place_changed", () => {
+        this.ngZone.run(() => {
+          //get the place result
+          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+
+          //set latitude, longitude and zoom
+          this.latitude = place.geometry.location.lat();
+          this.longitude = place.geometry.location.lng();
+          this.zoom = 12;
+        });
+      });
+    });
+
     // mockData
     //  this.graphicalData = mockData;
     this.selectedArea = areaData[1];
@@ -113,7 +193,7 @@ export class DashboardComponent implements OnInit, AfterContentInit {
     this.lineChart2 = violationCountGraphData2;
     this.barGraph2 = distanceViolationData2;
     this.selectedLineChart = this.lineChart1;
-    this.blockageSupplyGraph = blockageSuppy;
+    this.blockageSupplyGraph = lineChart;
     this.demandSupplyGraph = demandSupply;
     this.selectedGraph = this.barGraph1;
 

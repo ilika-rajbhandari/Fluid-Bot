@@ -29,23 +29,34 @@
 
 
     <div class="overlay-wrapper changeLocationOverlay" [ngClass]='isChangeLocation ? "show-popup" : ""'>
-        <div class="new-location-wrapper" style="max-height: 55%;">
+        <div class="new-location-wrapper" style="max-height: 100%;">
             <span id="close-it" (click)="closeChangeLocationPopup()">X</span>
 
-            <h3>Choose location (<em>{{selectedArea.locality}}</em>)</h3>
-            <div class="row">
+            <!-- <h3>Choose location (<em>{{selectedArea.locality}}</em>)</h3> -->
+            <!-- <div class="row">
                 <div class="col-sm-9">
                     <select class="form-control" id="locationName" [(ngModel)]="selectedArea.locality">
                         <option *ngFor="let area of areaData" value="{{ area.locality }}">
                             {{ area.locality }}</option>
                     </select>
                 </div>
-                <div class="col-sm-3">
-                    <button type="button" class="btn btn-secondary" id="updateLocation" (click)="changeLocation()">Go</button>
-                </div>
-            </div>
+               
+            </div> -->
             <div class="col-sm-12">
-                <iframe class="w-100" src="https://maps.google.com/maps?q='+latitude+','+longitude+'&hl=en&z=10&amp;output=embed" style="margin-top: 64px; border: 1px solid cadetblue;height: 287px;" allowfullscreen="true"></iframe>
+                <div class="form-group">
+                    <h4>Enter address</h4>
+                    <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+                  </div>
+                
+                  <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+                    <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+                      (dragEnd)="markerDragEnd($event)"></agm-marker>
+                  </agm-map>
+                  <div class="col-sm-3">
+                    <button type="button" class="btn btn-secondary" id="updateLocation" (click)="changeLocation()">Change Location</button>
+                </div>
+                 <!--  <p>Address: {{address}}</p> -->
+                <!-- <iframe class="w-100" src="https://maps.google.com/maps?q='+latitude+','+longitude+'&hl=en&z=10&amp;output=embed" style="margin-top: 64px; border: 1px solid cadetblue;height: 287px;" allowfullscreen="true"></iframe> -->
             </div>
         </div>
     </div>
@@ -79,18 +90,18 @@
             <div class="input-group">                      
                 <input type="checkbox" name="pipeblockage" />
                 <span class="input-group-addon">Pipe Blockage </span>
-                <input type="number" class="form-control" name="violationLevel" [(ngModel)]="pipeblockage" placeholder="or 100 +" id="pipeblockage" [value]="" style="display:inline-flex; width: 50px;height: 40px; margin-left: 20px;">
+                <input type="number" class="form-control" name="pipeblockage" [(ngModel)]="pipeblockage" placeholder="or 100 +" id="pipeblockage" [value]="" style="display:inline-flex; width: 50px;height: 40px; margin-left: 20px;">
             </div>
             <div class="input-group">
-                        <input type="checkbox" name="pipeblockage" />
+                        <input type="checkbox" name="pipetimespan" />
                         <span class="input-group-addon">Remaining Pipe Time Span </span>
-                        <input type="number" class="form-control" name="violationLevel" [(ngModel)]="pipetimespan" placeholder="or 100 +" id="pipetimespan" [value]="" style="display:inline-flex; width: 50px; height:40px;margin-left: 20px;">
+                        <input type="number" class="form-control" name="pipetimespan" [(ngModel)]="pipetimespan" placeholder="or 100 +" id="pipetimespan" [value]="" style="display:inline-flex; width: 50px; height:40px;margin-left: 20px;">
                         </div>
                         <div class = "input-group">
-                        <input type="checkbox" name="pipeblockage" />
+                        <input type="checkbox" name="flowrate" />
                         
                         <span class="input-group-addon">Flow Rate </span>
-                        <input type="number" class="form-control" name="violationLevel" [(ngModel)]="flowrate" placeholder="or 100 +" id="flowrate" [value]="" style="display:inline-flex; width: 50px; height: 40px; margin-left: 20px;">
+                        <input type="number" class="form-control" name="flowrate" [(ngModel)]="flowrate" placeholder="or 100 +" id="flowrate" [value]="" style="display:inline-flex; width: 50px; height: 40px; margin-left: 20px;">
                     </div>
           </form>
         </div>
@@ -109,7 +120,8 @@
           <div class="card-body">
             <h4 class="card-title">Per Capita Water requirement in Delhi</h4>
             <canvas baseChart [chartType]="'pie'" [datasets]="doughnutPieChartData" [labels]="doughnutPieChartLabels" [options]="doughnutPieChartOptions" [colors]="doughnutPieChartColors"></canvas>
-            <h4 class="card-title">Total per capita water requirement= 274 lpcd</h4>
+            <h4 class="card-title">Total per capita water requirement= 274 Lpcd</h4>
+            <span class="info">*Lpcd= Litre per Capita per Day</span>
           </div>
         </div>
 </div>  
@@ -140,7 +152,7 @@
     <div class="flex-row-md">
       
             <div class="info-box animate__animated animate__pulse animate__delay-1s" style="
-            background-color: #5aa3c5 !important;color:whitesmoke">
+            background-color: #5AA3C5 !important;color:whitesmoke">
                <span class="info-box-icon"><img src="./assets/images/gas-pipeline.png"></span>
     
                <div class="info-box-content">
@@ -191,13 +203,53 @@
         </div>
     </div>
             
-
-
-     
-
-
  <!--First container ends-->
- <div class="sub-container"><span class="statistics input-group-addon"> Statistics</span></div>
+ <div class="sub-container"><span class="statistics"> Statistics</span></div>
+    <div class= "graph-container">
+    
+     
+        <div class="row mt-3 bg-fancy video-info-area">
+           <div class="col-lg-6 col-md-6">
+               <div class="rplr-30">
+                   <div class="c-share">
+                       <input class="c-share__input" [class.active]="isActive" type="checkbox" id="checkbox">
+                       <label class="c-share__toggler" (click)="isActive = !isActive;" for="checkbox">
+                           <span class="c-share__icon"></span>
+                       </label>
+                       <ul class="c-share_options" data-title="Share">
+                           <li>Share as Image</li>
+                           <li>Share as CSV</li>
+                           <li>Share as PDF</li>
+                           <li>Share via Email</li>
+                       </ul>
+                   </div>
+                   <div class="future-services services  text-center wow slideInUp" data-wow-duration="0.5s" style="visibility: visible; animation-duration: 0.5s; animation-name: slideInUp;">
+                       <highcharts-chart [Highcharts]="Highcharts" [options]="selectedLineChart" style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+                   </div>
+               </div>
+           </div>
+           <div class="col-lg-6 col-md-6">
+               <div class="rplr-30">
+                   <div class="c-share">
+                       <input class="c-share__input" [class.active]="isActiveShare" type="checkbox" id="checkbox">
+                       <label class="c-share__toggler" for="checkbox" (click)="isActiveShare = !isActiveShare;">
+                           <span class="c-share__icon"></span>
+                       </label>
+                       <ul class="c-share_options" data-title="Share">
+                           <li>Share as Image</li>
+                           <li>Share as CSV</li>
+                           <li>Share as PDF</li>
+                           <li>Share via Email</li>
+                       </ul>
+                   </div>
+                   <div class="future-services services text-center wow slideInUp" data-wow-duration="1s" style="visibility: visible; animation-duration: 1s; animation-name: slideInUp;">
+                       <highcharts-chart [Highcharts]="Highcharts" [options]="selectedGraph" style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+                   </div>
+               </div>
+           </div>
+       </div>
+    </div>
+
 
  <div class= "graph-container">
     <div class="row mt-3 bg-fancy video-info-area">
@@ -246,58 +298,14 @@
 
  
 
- <div class= "graph-container">
-    
-     
-     <div class="row mt-3 bg-fancy video-info-area">
-        <div class="col-lg-6 col-md-6">
-            <div class="rplr-30">
-                <div class="c-share">
-                    <input class="c-share__input" [class.active]="isActive" type="checkbox" id="checkbox">
-                    <label class="c-share__toggler" (click)="isActive = !isActive;" for="checkbox">
-                        <span class="c-share__icon"></span>
-                    </label>
-                    <ul class="c-share_options" data-title="Share">
-                        <li>Share as Image</li>
-                        <li>Share as CSV</li>
-                        <li>Share as PDF</li>
-                        <li>Share via Email</li>
-                    </ul>
-                </div>
-                <div class="future-services services  text-center wow slideInUp" data-wow-duration="0.5s" style="visibility: visible; animation-duration: 0.5s; animation-name: slideInUp;">
-                    <highcharts-chart [Highcharts]="Highcharts" [options]="selectedLineChart" style="width: 100%; height: 400px; display: block;"></highcharts-chart>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6">
-            <div class="rplr-30">
-                <div class="c-share">
-                    <input class="c-share__input" [class.active]="isActiveShare" type="checkbox" id="checkbox">
-                    <label class="c-share__toggler" for="checkbox" (click)="isActiveShare = !isActiveShare;">
-                        <span class="c-share__icon"></span>
-                    </label>
-                    <ul class="c-share_options" data-title="Share">
-                        <li>Share as Image</li>
-                        <li>Share as CSV</li>
-                        <li>Share as PDF</li>
-                        <li>Share via Email</li>
-                    </ul>
-                </div>
-                <div class="future-services services text-center wow slideInUp" data-wow-duration="1s" style="visibility: visible; animation-duration: 1s; animation-name: slideInUp;">
-                    <highcharts-chart [Highcharts]="Highcharts" [options]="selectedGraph" style="width: 100%; height: 400px; display: block;"></highcharts-chart>
-                </div>
-            </div>
-        </div>
-    </div>
- </div>
-
+ 
 
 
 
 
 <ng-template #videocontent1 let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Central Delhi</h4>
+      <h4 class="modal-title" id="modal-basic-title">Central Delhi - Karol Bagh</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -305,9 +313,10 @@
     <div class="modal-body">
       <form>
        <video src="{{currentVideo}}" height="300px" width="500px" autoplay loop></video>
-       <span class="input-group-addon">Length of Pipe: 500 KM </span>
-       <span class="input-group-addon">Diameter of Pipe: 10 M </span>
-       <span class="input-group-addon">Current Age of Pipe: 98 years </span>
+       <span class="input-group-addon">Time Stamp: {{todaysDataTime }}</span>
+       <span class="input-group-addon">Length of Pipe: 10 KM </span>
+       <span class="input-group-addon">Diameter of Pipe: 5 M </span>
+       <span class="input-group-addon">Current Age of Pipe: 23 years </span>
        <span class="input-group-addon">Pipe Material: Cast Iron </span>
        <span class="input-group-addon">Flow Rate: 68 L/s </span>
        <span class="input-group-addon">Remaining useful life: 5 years </span>
@@ -324,7 +333,7 @@
 
   <ng-template #videocontent2 let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">South Delhi</h4>
+      <h4 class="modal-title" id="modal-basic-title">South Delhi - Sarita Vihar</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -332,13 +341,14 @@
     <div class="modal-body">
       <form>
        <video src="{{currentVideo}}" height="300px" width="500px" autoplay loop></video>
-       <span class="input-group-addon">Length of Pipe: 500 KM </span>
-       <span class="input-group-addon">Diameter of Pipe: 10 M </span>
-       <span class="input-group-addon">Current Age of Pipe: 98 years </span>
-       <span class="input-group-addon">Pipe Material: Cast Iron </span>
+       <span class="input-group-addon">Time Stamp: {{todaysDataTime }}</span>
+       <span class="input-group-addon">Length of Pipe: 7 KM </span>
+       <span class="input-group-addon">Diameter of Pipe: 4 M </span>
+       <span class="input-group-addon">Current Age of Pipe: 27 years </span>
+       <span class="input-group-addon">Pipe Material: PVC </span>
        <span class="input-group-addon">Flow Rate: 70 L/s </span>
-       <span class="input-group-addon">Remaining useful life: 5 years </span>
-       <span class="input-group-addon">Pipe Deterioration: 50 % </span>
+       <span class="input-group-addon">Remaining useful life: 20 years </span>
+       <span class="input-group-addon">Pipe Deterioration: 10 % </span>
        <span class="input-group-addon">Pipe Blockage: 30 % </span>
       </form>
     </div>
@@ -349,7 +359,7 @@
 
   <ng-template #videocontent3 let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">West Delhi</h4>
+      <h4 class="modal-title" id="modal-basic-title">West Delhi - Ramesh Nagar</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -357,13 +367,14 @@
     <div class="modal-body">
       <form>
        <video src="{{currentVideo}}" height="300px" width="500px" autoplay loop></video>
-       <span class="input-group-addon">Length of Pipe: 500 KM </span>
-       <span class="input-group-addon">Diameter of Pipe: 10 M </span>
-       <span class="input-group-addon">Current Age of Pipe: 98 years </span>
+       <span class="input-group-addon">Time Stamp: {{todaysDataTime }}</span>
+       <span class="input-group-addon">Length of Pipe: 8 KM </span>
+       <span class="input-group-addon">Diameter of Pipe: 4 M </span>
+       <span class="input-group-addon">Current Age of Pipe: 28 years </span>
        <span class="input-group-addon">Pipe Material: Cast Iron </span>
        <span class="input-group-addon">Flow Rate: 66 L/s </span>
-       <span class="input-group-addon">Remaining useful life: 5 years </span>
-       <span class="input-group-addon">Pipe Deterioration: 54 % </span>
+       <span class="input-group-addon">Remaining useful life: 8 years </span>
+       <span class="input-group-addon">Pipe Deterioration: 40 % </span>
        <span class="input-group-addon">Pipe Blockage: 33 % </span>
       </form>
     </div>
@@ -374,7 +385,7 @@
 
   <ng-template #videocontent4 let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Najafgarh</h4>
+      <h4 class="modal-title" id="modal-basic-title">Najafgarh - Daulat Pur</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -382,13 +393,14 @@
     <div class="modal-body">
       <form>
        <video src="{{currentVideo}}" height="300px" width="500px" autoplay loop></video>
-       <span class="input-group-addon">Length of Pipe: 500 KM </span>
-       <span class="input-group-addon">Diameter of Pipe: 10 M </span>
-       <span class="input-group-addon">Current Age of Pipe: 98 years </span>
+       <span class="input-group-addon">Time Stamp: {{todaysDataTime }}</span>
+       <span class="input-group-addon">Length of Pipe: 17 KM </span>
+       <span class="input-group-addon">Diameter of Pipe: 5 M </span>
+       <span class="input-group-addon">Current Age of Pipe: 23 years </span>
        <span class="input-group-addon">Pipe Material: Cast Iron </span>
        <span class="input-group-addon">Flow Rate: 70 L/s </span>
-       <span class="input-group-addon">Remaining useful life: 5 years </span>
-       <span class="input-group-addon">Pipe Deterioration: 67 % </span>
+       <span class="input-group-addon">Remaining useful life: 1 year </span>
+       <span class="input-group-addon">Pipe Deterioration: 70 % </span>
        <span class="input-group-addon">Pipe Blockage: 49 % </span>
       </form>
     </div>
@@ -399,28 +411,25 @@
 
  <div class="container">
      <div class="form-group">
-        <div class="sub-container"><span class="statistics input-group-addon recommendations">Recommendations</span></div>
+        <div class="sub-container"><span class="statistics">Recommendations</span></div>
          <div class="flex-row row-3">
-           <div class="col-md-6 recommendations">
-            <div class="info-box animate__animated animate__lightSpeedInRight animate__delay-2s recommendations" style="
-            background-color: #305A68 !important;color:whitesmoke">    
-               <div class="info-box-content recommendations">
-                   <p class="info-box-number recommendations" *ngIf="islocationChanged; else elseBlock">Pipes are deteriorated more than 80%. Maintenance required.</p>
-                   <ng-template #elseBlock><p class="info-box-number recommendations">
+           <div class="col-md-6 recommendations">  
+               <div class="oval">
+                   <p class="recommendations" *ngIf="islocationChanged; else elseBlock">Pipes are deteriorated more than 80%. Maintenance required.</p>
+                   <ng-template #elseBlock><p class="recommendations">
                     Due to weather forecast about heavy rain, maintenance might be required in upcoming month. 
                    </p></ng-template>
                </div>
-           </div>
          </div>
      </div>
  </div>
 
- <section class="live-video-track-wrapper conection-shap" id="liveVideoSection">
-    <div class="banner just-anim">
-
-        <div class="my-container container">
-            <span class="liveView">Live</span>
-       <img class="liveView" src="./assets/images/icons8-live-video-on.gif">
+ <div class="videoTacker" id="liveVideoSection">
+    <div class="videoLive">
+     <div class="live">     
+            <span class="liveView">Live</span> <div class="dot"></div></div>
+           
+      
             <div class="video-with-details flex-lg-row">  
                 <div class="video-area col-md-3">                                               
                     
@@ -430,21 +439,21 @@
 
   <div class="video-area col-md-3">
         <div class="video-button">
-              <video src="{{currentVideo}}" ngbPopover="South Delhi"
+              <video src="{{areaVideo1}}" ngbPopover="South Delhi"
   [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="310px" height="100px" autoplay loop></video><button class="btn bg-transparent" (click)="open(videocontent2)"></button></div></div>
 
   <div class="video-area col-md-3">
         <div class="video-button">             
-                                <video src="{{currentVideo}}" ngbPopover="West Delhi"
+                                <video src="{{areaVideo2}}" ngbPopover="West Delhi"
   [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="310px" height="100px" autoplay loop></video><button class="btn bg-transparent" (click)="open(videocontent3)"></button></div></div>
 
   <div class="video-area najafgarh col-md-3">
   <div class="video-button"> 
-  <video src="{{currentVideo}}" ngbPopover="Najafgarh"
+  <video src="{{areaVideo3}}" ngbPopover="Najafgarh"
   [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="310px" height="100px" autoplay loop></video><button class="btn bg-transparent" (click)="open(videocontent4)"></button></div></div>                            
                                 
                         </div>
-                        </div>
+                        
                    </div>
 
                    <div class="areaSelection">
@@ -455,7 +464,7 @@
                    </div>
                    <div id="video-details">You're watching {{ selectedArea.locality }} </div>  
 
-</section>
+                </div>
 
 
 

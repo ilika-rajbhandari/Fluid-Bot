@@ -4,24 +4,11 @@
 }
 
 .logo {
-  width: 100%;
-  max-width: 100px;
-  /* position: absolute; */
   top: 0;
-  height: 74px;
+    height: 87px;
+    margin-left: -62px;
+    width: 289px;
 }
-
-/* Style the header links */
-/* .header a {
-    float: left;
-    color: black;
-    text-align: center;
-    padding: 12px;
-    text-decoration: none;
-    font-size: 18px;
-    line-height: 25px;
-    border-radius: 4px;
-  } */
 
 /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
 .header a.logo {
@@ -31,8 +18,9 @@
 
 /* Change the background color on mouse-over */
 .header a:hover {
-  background-color: #ddd;
+  // background-color: #ddd;
   color: black;
+  cursor: pointer;
 }
 
 /* Style the active/current link*/
