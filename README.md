@@ -154,9 +154,8 @@ See the list of [contributors](https://github.com/ilika-rajbhandari/Fluid-Bot/gr
 GitHub is used for versioning.
 
 ## Authors
-See also the list of [contributors](https://github.com/ilika-rajbhandari/Fluid-Bot/graphs/contributors) who participated in this project.
 <a href="https://github.com/ilika-rajbhandari/Fluid-Bot/graphs/contributors">
-<img src="https://contributors-img.web.app/image?repo=Call-for-Code/Project-Sample" />
+<img src="https://contributors-img.web.app/image?repo=ilika-rajbhandari/Fluid-Bot" />
 </a>
 
 
