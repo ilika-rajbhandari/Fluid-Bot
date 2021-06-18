@@ -133,7 +133,7 @@ Running main.py will ask for video path and process the frames to detect cracks,
 #### Blockage Detection
 ![blockage_detection](Documents/blockage_detection.gif)
 #### Corrosion Detection
-![corrosion_detection](Documents/corrosion_detection.gif)
+![corrosion_detection](Documents/corrossion_detection.gif)
 #### Crack Detection
 ![crack_detection](Documents/crack_detection.gif)
 
