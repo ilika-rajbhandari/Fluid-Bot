@@ -47,10 +47,11 @@ Our solution can simplify the job of the concerned teams by efficient use of the
 These pipelines carry water, sewage, petroleum, and PNG. Any bursts in these pipelines can cause devastating damage to the nature. Therefore, the idea is to build a state-of-the-art solution that can help anticipate defects/bursts in the pipelines and predict their remaining useful life.
 
 ## Demo video
-[![Watch the video](Documents/Demo_Video.png)](https://youtu.be/uk7C-x1zBPs)
+[![Watch the video](Documents/Demo_Video.png)](https://youtu.be/T5iH5mCjD7U)
 
 ## Detailed video
-[![Watch the video](Documents/Detailed_Video.png)](https://youtu.be/T5iH5mCjD7U)
+[![Watch the video](Documents/Detailed_Video.png)](https://youtu.be/PB8ZcHdDXpQ)
+
 
 ## The Architecture
 This diagram shows the high level architecture:
