@@ -50,7 +50,7 @@ These pipelines carry water, sewage, petroleum, and PNG. Any bursts in these pip
 [![Watch the video](Documents/Demo_Video.png)](https://youtu.be/uk7C-x1zBPs)
 
 ## Detailed video
-[![Watch the video](Documents/Detailed_Video.png)](https://youtu.be/PB8ZcHdDXpQ)
+[![Watch the video](Documents/Detailed_Video.png)](https://youtu.be/T5iH5mCjD7U)
 
 ## The Architecture
 This diagram shows the high level architecture:
