@@ -53,6 +53,14 @@ These pipelines carry water, sewage, petroleum, and PNG. Any bursts in these pip
 ## Detailed Video
 
 ## The Architecture
+This diagram shows the high level architecture:
+
+<img src="https://github.com/ilika-rajbhandari/Fluid-Bot/blob/main/Documents/Architecture%20Diagram.png">
+
+
+Following diagram shows the Crack and Blockage Identification process:
+
+<img src="https://github.com/ilika-rajbhandari/Fluid-Bot/blob/main/Documents/Tensor%20Flow%20Diagram.png">
 
 ## Long Description
 Pipeline distribution systems contain different types of buried pipes (for example, cast iron, ductile iron, asbestos cement, polyethylene, steel, and polyvinyl chloride). As pipeline infrastructure becomes older, its structural condition, hydraulic capacity, and performance deteriorates.
@@ -76,6 +84,10 @@ Authorized users/administrators can view the data on FluidBot website. On succes
 
 ## Project RoadMap
 
+The RoadMap defines the timelines and Upcoming Features:
+
+<img src="https://github.com/ilika-rajbhandari/Fluid-Bot/blob/main/Documents/RoadMap.png">
+
 ## Getting Started
 
 ## Live Demo
@@ -85,8 +97,10 @@ Authorized users/administrators can view the data on FluidBot website. On succes
 * [IBM Cloud Foundry](https://www.cloudfoundry.org/the-foundry/ibm-cloud-foundry/) - DashBoard Creation
 * [IBM Angular API](https://www.ibm.com/cloud/blog/simple-angular-node-application) - The web framework used
 * [IBM Watson Studio](https://cloud.ibm.com/catalog/services/watson-studio) - Data Preparation
+* [Machine Learning](https://cloud.ibm.com/catalog/services/machine-learning) - RUL Prediction
 
 ## Contributing
+See the list of [contributors](https://github.com/ilika-rajbhandari/Fluid-Bot/graphs/contributors) who participated in this project.
 
 ## Versioning
 GitHub is used for versioning.
