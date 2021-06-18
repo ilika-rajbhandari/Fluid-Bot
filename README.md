@@ -71,15 +71,15 @@ Pipeline distribution systems contain different types of buried pipes (for examp
 Solution can be described in 3 Sections:
 
 ### Section -1
-AI Based Data Modelling
+####AI Based Data Modelling
 
 IOT hardware with drone/camera feed will be an input to the model for detecting the pipe flow rate, diameter, area, blockage, corrosion, and breakage using TensorFlow neural networks. Flow sensors (hardware) mounted on the drone/camera will determine the fluid flow rate. These statistics will be used for estimating the remaining useful life of the pipe based on additional factors such as soil components, safety measures, geographical location, and fluid type. Moreover, recommendations about the type of pipes to be used in a specific region can be made.
 ### Section -2
-Data Filtration
+####Data Filtration
 
 The processed data obtained from Section 1 is stored in a central server, database, or repository. When an end user requests to view the statistics using the UI, raw data for the requested location is fetched from the central server and cumulative data is prepared using Global APIs. This data provides information about the flow rate, prediction of pipe deterioration, and remaining useful life of the pipeline with recommendations. 
 ### Section -3
-User Interface
+####User Interface
 
 Authorized users/administrators can view the data on FluidBot website. On successful log on to a specified zone, a Google API will request for the location and display the user's location data. Data of other regions can also be seen by selecting the location on the Google map. Based on the selected region, the data will be fetched from the central server with a live feed. Statistics of different regions can be compared. For alarming situations in any region, SMS/email messages can be sent to the designated person. The end users will have the read-only access to the UI and can file a complaint in case of any damage in their respective regions. 
 
@@ -87,7 +87,7 @@ Authorized users/administrators can view the data on FluidBot website. On succes
 
 The RoadMap defines the timelines and Upcoming Features:
 
-Features in Model 
+###Features in Model 
 
     1.Fine Tuning the response time 
     2.Model Implementation for Pipe Material
@@ -95,7 +95,7 @@ Features in Model
     4.Water Quality Check
     
 	
-Features in UI 
+###Features in UI 
 
     1.Android App in Google Play Store, Support for IOS Application 
     2.Adding QR Code 
