@@ -124,13 +124,13 @@ git clone https://github.com/ilika-rajbhandari/Fluid-Bot.git
 ### Run the project
 
 Steps 
-cd Fluid-Bot
-1. pip install –r requirements.txt
-2. Run command `python Main.py`
-3. Enter the Video Path 
-3. Output -Video Images and Excel File will be generated 
+1. cd Fluid-Bot
+2. pip install –r requirements.txt
+3. Run command `python Main.py`
+4. Enter the Video Path 
+5. Output - Video Images and Excel File will be generated 
 
-Running main.py will ask for video path and process the frames to detect cracks, corrosion , blockage and flow rate
+Running `Main.py` will ask for video path and process the frames to detect cracks,corrosion,blockage and flow rate.
  
 #### Blockage Detection
 ![blockage_detection](Documents/blockage_detection.gif)
