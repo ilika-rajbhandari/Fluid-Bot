@@ -14,13 +14,11 @@
   * [Section -3](#section--3)
 - [Project RoadMap](#project-roadmap)
 - [Getting Started](#getting-started)
-- [Live Demo](#live-demo)
 - [Built with](#built-with)
 - [Contributing](#contributing)
 - [Versioning](#versioning)
 - [Authors](#authors)
-- [Licence](#licence)
-- [Acknowledgements](#acknowledgements)
+
 
 ## Short Description
 An Efficient AI based Solution to manage pipelined distribution system and take corrective measures.
