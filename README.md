@@ -117,7 +117,7 @@ Software's required
 
 ### Clone the repository
 
-git clone https://github.com/deepikagarg01/AI-Quaranteam.git
+git clone https://github.com/ilika-rajbhandari/Fluid-Bot.git
 
 ### Run the project
 
@@ -126,16 +126,16 @@ cd Fluid-Bot
 1. pip install –r requirements.txt
 2. run command python main.py 
 3. Enter the Video Path 
-3. Output Video Images and Excel File will be generated 
+3. Output -Video Images and Excel File will be generated 
 
 Running main.py will ask for video path and process the frames to detect cracks, corrosion , blockage and flow rate
  
 #### Blockage Detection
-![blockage_detection](document/blockage_detection.gif)
+![blockage_detection](Documents/blockage_detection.gif)
 #### Corrosion Detection
-![corrosion_detection](document/corrosion_detection.gif)
+![corrosion_detection](Documents/corrosion_detection.gif)
 #### Crack Detection
-![crack_detection](document/crack_detection.gif)
+![crack_detection](Documents/crack_detection.gif)
 
 ## Live Demo
 
