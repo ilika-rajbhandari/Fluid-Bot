@@ -48,9 +48,11 @@ Our solution can simplify the job of the concerned teams by efficient use of the
 ### The idea
 These pipelines carry water, sewage, petroleum, and PNG. Any bursts in these pipelines can cause devastating damage to the nature. Therefore, the idea is to build a state-of-the-art solution that can help anticipate defects/bursts in the pipelines and predict their remaining useful life.
 
-## Demo Video
+## Demo video
+[![Watch the video](Documents/Demo_Video.png)](https://youtu.be/uk7C-x1zBPs)
 
-## Detailed Video
+## Detailed video
+[![Watch the video](Documents/Detailed_Video.png)](https://youtu.be/JnLEEOXUN-s)
 
 ## The Architecture
 This diagram shows the high level architecture:
@@ -124,7 +126,7 @@ git clone https://github.com/ilika-rajbhandari/Fluid-Bot.git
 Steps 
 cd Fluid-Bot
 1. pip install –r requirements.txt
-2. run command python main.py 
+2. Run command `python Main.py`
 3. Enter the Video Path 
 3. Output -Video Images and Excel File will be generated 
 
@@ -137,7 +139,6 @@ Running main.py will ask for video path and process the frames to detect cracks,
 #### Crack Detection
 ![crack_detection](Documents/crack_detection.gif)
 
-## Live Demo
 
 ## Built with
 * [IBM Cloudant](https://cloud.ibm.com/catalog?search=cloudant#search_results) - Cloud Server
