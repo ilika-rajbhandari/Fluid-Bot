@@ -305,7 +305,9 @@
 
 <ng-template #videocontent1 let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Central Delhi - Karol Bagh</h4>
+      <h4 class="modal-title" id="modal-basic-title" *ngIf="!islocationChanged; else area1" >Central Delhi - Karol Bagh</h4>
+      <ng-template #area1><h4 class="modal-title">Pitampura</h4>
+        </ng-template>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -333,7 +335,9 @@
 
   <ng-template #videocontent2 let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">South Delhi - Sarita Vihar</h4>
+      <h4 class="modal-title" id="modal-basic-title" *ngIf="!islocationChanged; else area2">South Delhi - Sarita Vihar</h4>
+      <ng-template #area2><h4 class="modal-title">Karol Bagh</h4>
+      </ng-template>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -359,7 +363,9 @@
 
   <ng-template #videocontent3 let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">West Delhi - Ramesh Nagar</h4>
+      <h4 class="modal-title" id="modal-basic-title" *ngIf="!islocationChanged; else area3">West Delhi - Ramesh Nagar</h4>
+      <ng-template #area3><h4 class="modal-title">Sadar Paharganj</h4>
+      </ng-template>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -385,7 +391,9 @@
 
   <ng-template #videocontent4 let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Najafgarh - Daulat Pur</h4>
+      <h4 class="modal-title" id="modal-basic-title" *ngIf="!islocationChanged; else area4">Najafgarh - Daulat Pur</h4>
+      <ng-template #area4><h4 class="modal-title">Civil Lines</h4>
+      </ng-template>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -435,33 +443,39 @@
                     
                          <div class= "video-button">                         
                                 <video src="{{currentVideo}}" ngbPopover="Central Dlehi"
-  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="310px" height="100px" autoplay loop></video> <button class="btn bg-transparent" (click)="open(videocontent1)"></button></div></div>
+  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="310px" height="100px" [muted]="'muted'" autoplay loop></video> <button class="btn bg-transparent" (click)="open(videocontent1)"></button></div></div>
 
   <div class="video-area col-md-3">
         <div class="video-button">
               <video src="{{areaVideo1}}" ngbPopover="South Delhi"
-  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="310px" height="100px" autoplay loop></video><button class="btn bg-transparent" (click)="open(videocontent2)"></button></div></div>
+  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="310px" height="100px" [muted]="'muted'" autoplay loop></video><button class="btn bg-transparent" (click)="open(videocontent2)"></button></div></div>
 
   <div class="video-area col-md-3">
         <div class="video-button">             
                                 <video src="{{areaVideo2}}" ngbPopover="West Delhi"
-  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="310px" height="100px" autoplay loop></video><button class="btn bg-transparent" (click)="open(videocontent3)"></button></div></div>
+  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="310px" height="100px" [muted]="'muted'" autoplay loop></video><button class="btn bg-transparent" (click)="open(videocontent3)"></button></div></div>
 
   <div class="video-area najafgarh col-md-3">
   <div class="video-button"> 
   <video src="{{areaVideo3}}" ngbPopover="Najafgarh"
-  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="310px" height="100px" autoplay loop></video><button class="btn bg-transparent" (click)="open(videocontent4)"></button></div></div>                            
+  [openDelay]="300" [closeDelay]="500" triggers="mouseenter:mouseleave" width="310px" height="100px" autoplay loop [muted]="'muted'"></video><button class="btn bg-transparent" (click)="open(videocontent4)"></button></div></div>                            
                                 
                         </div>
                         
                    </div>
 
-                   <div class="areaSelection">
+                   <div class="areaSelection" *ngIf="!islocationChanged; else areaBlock">
                        <span>Central Delhi</span>
                        <span>South Delhi</span>
                        <span>West Delhi</span>
                        <span>Najafgarh</span>
                    </div>
+                   <ng-template #areaBlock><div class="areaSelection">
+                    <span>Pitampura</span>
+                    <span>Karol Bagh</span>
+                    <span>Sadar Paharganj</span>
+                    <span>Civil Lines</span>
+                   </div></ng-template>
                    <div id="video-details">You're watching {{ selectedArea.locality }} </div>  
 
                 </div>
