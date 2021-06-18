@@ -111,10 +111,11 @@ The instructions can help you to install the project on you local environment
 ### Prerequisite 
 
 Software's required 
-1. Windows Server
+1. Windows/Linux Server
 2. Python 3.8 or above 
-3. Deploy a windows server 2019 - Please note if Linux is used then make sure linux is installed with desktop 
-4. For Linux server enable the X11 Forwarding and gnome 
+3. For windows install windows server 2019  
+4. Please note if Linux is used then make sure linux is installed with desktop 
+5. For Linux server enable the X11 Forwarding and gnome 
 
 ### Clone the repository
 
