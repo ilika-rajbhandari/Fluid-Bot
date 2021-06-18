@@ -86,9 +86,56 @@ Authorized users/administrators can view the data on FluidBot website. On succes
 
 The RoadMap defines the timelines and Upcoming Features:
 
+Features in Model 
+
+    1.Fine Tuning the response time 
+    2.Model Implementation for Pipe Material
+    3.Recommendation for Alternate channel in case of Pipe Blockage 
+    4.Water Quality Check
+    
+	
+Features in UI 
+
+    1.Android App in Google Play Store, Support for IOS Application 
+    2.Adding QR Code 
+    3.Recommendations for Pipe Material and Alternate channel 
+    4.Water Quality for Specific Area
+
 <img src="https://github.com/ilika-rajbhandari/Fluid-Bot/blob/main/Documents/RoadMap.png">
 
 ## Getting Started
+
+The instructions can help you to install the project on you local environment
+
+### Prerequisite 
+
+Software's required 
+1. Windows Server
+2. Python 3.5 or above 
+3. Deploy a windows server 2019 - Please note if Linux is used then make sure linux is installed with desktop 
+4. For Linux server enable the X11 Forwarding and gnome 
+
+### Clone the repository
+
+git clone https://github.com/deepikagarg01/AI-Quaranteam.git
+
+### Run the project
+
+Steps 
+cd Fluid-Bot
+1. pip install –r requirements.txt
+2. run command python main.py 
+3. Enter the Video Path 
+3. Output Video Images and Excel File will be generated 
+
+Running main.py will ask for video path and process the frames to detect cracks, corrosion , blockage and flow rate
+ 
+#### Blockage Detection
+![blockage_detection](document/blockage_detection.gif)
+#### Corrosion Detection
+![corrosion_detection](document/corrosion_detection.gif)
+#### Crack Detection
+![crack_detection](document/crack_detection.gif)
 
 ## Live Demo
 
@@ -106,8 +153,6 @@ See the list of [contributors](https://github.com/ilika-rajbhandari/Fluid-Bot/gr
 GitHub is used for versioning.
 
 ## Authors
+See also the list of [contributors](https://github.com/ilika-rajbhandari/Fluid-Bot/graphs/contributors) who participated in this project.
 
-## Licence
-
-## Acknowledgements
 

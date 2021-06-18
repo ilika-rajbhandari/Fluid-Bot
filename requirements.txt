@@ -1,0 +1,15 @@
+numpy
+opencv-python
+xlsxwriter
+image
+torch
+torchvision
+pydot
+tensorflow
+object_detection
+scikit-image
+scipy
+pandas
+xlrd
+openpyxl
+graphviz
