@@ -1,0 +1,7 @@
+
+applications :
+- name: "fluid-bot"
+  path : "angular9"
+  memory : 256M
+  buildpack :
+  - "https://github.com/ilika-rajbhandari/Fluid-Bot.git"
