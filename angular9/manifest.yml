@@ -4,4 +4,4 @@ applications :
   path : "angular9"
   memory : 256M
   buildpack :
-  - "https://github.com/ilika-rajbhandari/Fluid-Bot.git"
+  - "https://github.com/cloudfoundry/staticfile-buildpack.git"
